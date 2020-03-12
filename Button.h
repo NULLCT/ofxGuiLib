@@ -3,18 +3,18 @@
 #include<string>
 #include "ofMain.h"
 using namespace std;
-
-class Button
+class Button//ボタンクラス。ボタンとして押された時、マウスが入ってきた時、などの関数があります
 {
 public:
-  int xb,yb,xe,ye;
-  int r,g,b;
-  int frames=-1;
-  string text;
-  bool tr=false;//トリガー。ボタンが押されたらtrueに
+  int xb,yb,xe,ye;//(xb,yb)から下にxe,右にyeまでのボタン
+  int r,g,b;//rgb。色。
+  string text;//この中に表示したい文字を。
+
   void check(int mousex,int mousey);//当たり判定とか
   void draw();//ボタン描画
-  bool moused();
+  bool moused();//マウスがボタンの中にあるのか？
+private:
+  bool tr=false;//トリガー。ボタンの中にカーソルが入ってきたらtrueに
+  int frames=-1;//押されたときのフィードバック用
 };
-
 #endif // BUTTON_H

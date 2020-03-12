@@ -1,13 +1,13 @@
 #include "Button.h"
-void Button::check(int mousex,int mousey){
-  if(((xb < mousex && yb < mousey )&& xe > mousex) && ye > mousey){
-      tr=true;
+void Button::check(int mousex,int mousey){//checkにはマウスの座標を入れること
+  if(((xb < mousex && yb < mousey )&& xe > mousex) && ye > mousey){//ボタン内か？
+      tr=true;//trはカーソルがボタンの中に入ってるかどうかを示す
     }else{
       tr=false;
     }
 }
-void Button::draw(){
-  if(tr){
+void Button::draw(){//ボタン描画
+  if(tr){//カーソルが入ってきたらちょっと大きめに描画
       ofSetColor(20,20,20,130);
       ofDrawRectangle(xb-20,yb-20,xe+40,ye+40);
       ofSetColor(r,g,b);
@@ -19,6 +19,6 @@ void Button::draw(){
       ofDrawRectangle(xb,yb,xe,ye);
     }
 }
-bool Button::moused(){
+bool Button::moused(){//マウス入ってる？
   return tr;
 }

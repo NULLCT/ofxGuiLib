@@ -1,5 +1,7 @@
 #include "ofApp.h"
-
+#define ALPHA
+//デバック機能を呼び出すのに必要。
+//あとでdefineに依存しない機構を作る
 //--------------------------------------------------------------
 void ofApp::setup(){
   test.xb=100;
@@ -10,13 +12,13 @@ void ofApp::setup(){
   test.g=0x8C;
   test.b=0x75;
   ofSetBackgroundColor(222,222,222);
-  ofSetWindowTitle(to_string(ofGetMouseX())+" "+to_string(ofGetMouseY()));
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  mousex=ofGetMouseX();
-  mousey=ofGetMouseY();
+#ifdef ALPHA //色々表示
+    ofSetWindowTitle(to_string(ofGetMouseX())+"."+to_string(ofGetMouseY())+" "+to_string(ofGetWindowWidth())+"×"+to_string(ofGetWindowHeight())+" "+to_string(ofGetWindowPositionX())+","+to_string(ofGetWindowPositionY()));
+#endif
 }
 
 //--------------------------------------------------------------
