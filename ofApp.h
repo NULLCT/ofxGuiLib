@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "ofMain.h"
 #include<iostream>
 #include<string>
@@ -10,10 +10,11 @@ public:
   int button_beginx = 0, button_beginy = 0, button_endx = 0, button_endy = 0;//button position
   int button_r = 141, button_g = 235, button_b = 208;//button color
   int button_wordr = 255, button_wordg = 255, button_wordb = 255;//word color
-  string button_word = u8"ERROR!!!!\nƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½!!!!\nERROR:class::buttondate.button_word‚É\n•¶š‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ\nCODE:(EoE)";//error message
+  string button_word = u8"ERROR!!!!\nã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ!!!!\nERROR:class::buttondate.button_wordã«\næ–‡å­—ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“\nCODE:(ãƒ»oãƒ»)";//error message
   bool button_enable = false;//button draw?
-  int button_shadowlengh = 0;
-  int button_fontx = 0, button_fonty = 0;
+  int button_shadowlenght = 0;//shadow lenght
+  int button_fontx = 0, button_fonty = 0;//font draw position
+  int button_underlinebeginx = 0, button_underlinebeginy = 0, button_underlinelenght = 0;
 };
 class ofApp : public ofBaseApp {
 public:

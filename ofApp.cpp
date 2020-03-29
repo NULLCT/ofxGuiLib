@@ -1,4 +1,4 @@
-#include "ofApp.h"
+ï»¿#include "ofApp.h"
 /*view closstile*/
 #define ALPHA
 //--------------------------------------------------------------
@@ -7,7 +7,7 @@ void ofApp::setup() {
   ofSetBackgroundColor(222, 222, 222);
   ofSetFrameRate(60);
   ofSetWindowTitle("ISBNCTRLSYSV1.0 | Made by NULLCT | MIT LICENSE");
-  ofSetLineWidth(1);
+  ofSetLineWidth(5);
   ofSetEscapeQuitsApp(false);
 
   /*font setting*/
@@ -41,63 +41,71 @@ void ofApp::setup() {
   buttons_cluster[0].button_enable=false;
   */
   buttons_cluster.resize(256);
+
   /*Error button*/
-  buttons_cluster[0].button_beginx = 0;
-  buttons_cluster[0].button_beginy = 0;
-  buttons_cluster[0].button_endx = 1280;
-  buttons_cluster[0].button_endy = 720;
+  buttons_cluster[0].button_beginx = 0+50;
+  buttons_cluster[0].button_beginy = 0+50;
+  buttons_cluster[0].button_endx = ofGetWidth()-100;
+  buttons_cluster[0].button_endy = ofGetHeight()-100;
   buttons_cluster[0].button_r = 235;
   buttons_cluster[0].button_g = 52;
   buttons_cluster[0].button_b = 52;
   buttons_cluster[0].button_wordr = 255;
   buttons_cluster[0].button_wordg = 255;
   buttons_cluster[0].button_wordb = 255;
-  buttons_cluster[0].button_word = u8"ERROR!!!!\n’v–½“I‚ÈƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½!!!!\nERROR:ƒGƒ‰[ƒR[ƒh‚ª‚È‚¢ƒGƒ‰[\nCODE:_(:3vÚ)_";
+  buttons_cluster[0].button_word = u8"ERROR!!!!\nè‡´å‘½çš„ãªã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ!!!!\nERROR:ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ãŒãªã„ã‚¨ãƒ©ãƒ¼\nCODE:_(:3ã€âˆ )_";
   buttons_cluster[0].button_enable = false;
-  /*ŠÇ—Ò‚Æ‚µ‚ÄƒƒOƒCƒ“*/
-  buttons_cluster[1].button_beginx = 50;
-  buttons_cluster[1].button_beginy = 50;
-  buttons_cluster[1].button_endx = 540;
-  buttons_cluster[1].button_endy = 620;
+
+  /*ç®¡ç†è€…ã¨ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³*/
+  buttons_cluster[1].button_beginx = 0+50;
+  buttons_cluster[1].button_beginy = 0+50;
+  buttons_cluster[1].button_endx = ofGetWidth()/2-100;
+  buttons_cluster[1].button_endy = ofGetHeight()-100;
   //buttons_cluster[1].button_r = 235;
   //buttons_cluster[1].button_g = 52;
   //buttons_cluster[1].button_b = 52;
   //buttons_cluster[1].button_wordr = 255;
   //buttons_cluster[1].button_wordg = 255;
   //buttons_cluster[1].button_wordb = 255;
-  buttons_cluster[1].button_word = u8"ŠÇ—Ò‚Æ‚µ‚ÄƒƒOƒCƒ“";
+  buttons_cluster[1].button_word = u8"ç®¡ç†è€…ã¨ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³";
   buttons_cluster[1].button_enable = false;
-  /*ˆÏˆõ‚Æ‚µ‚ÄƒƒOƒCƒ“*/
-  buttons_cluster[2].button_beginx = 50;
+
+  /*å§”å“¡ã¨ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³*/
+  buttons_cluster[2].button_beginx = ofGetWidth()/2+50;
   buttons_cluster[2].button_beginy = 50;
-  buttons_cluster[2].button_endx = 540;
-  buttons_cluster[2].button_endy = 620;
+  buttons_cluster[2].button_endx = ofGetWidth()/2-100;
+  buttons_cluster[2].button_endy = ofGetHeight()-100;
   //buttons_cluster[2].button_r = 235;
   //buttons_cluster[2].button_g = 52;
   //buttons_cluster[2].button_b = 52;
   //buttons_cluster[2].button_wordr = 255;
   //buttons_cluster[2].button_wordg = 255;
   //buttons_cluster[2].button_wordb = 255;
-  buttons_cluster[2].button_word = u8"ˆÏˆõ‚Æ‚µ‚ÄƒƒOƒCƒ“";
+  buttons_cluster[2].button_word = u8"å§”å“¡ã¨ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³";
   buttons_cluster[2].button_enable = false;
-  //1280, 720,
-  /*font sentering*/
+
+  //1280, 720
+  /*font sentering & set underline*/
   for (int counter = 0; counter < buttons_cluster.size(); counter++) {
     buttons_cluster[counter].button_fontx = ((buttons_cluster[counter].button_beginx * 2 + buttons_cluster[counter].button_endx) / 2) - (font.stringWidth(buttons_cluster[counter].button_word) / 2);
     buttons_cluster[counter].button_fonty = ((buttons_cluster[counter].button_beginy * 2 + buttons_cluster[counter].button_endx) / 2) + (font.stringHeight(buttons_cluster[counter].button_word) / 2);
+    
+    buttons_cluster[counter].button_underlinebeginx = ((buttons_cluster[counter].button_beginx * 2 + buttons_cluster[counter].button_endx) / 2) - (font.stringWidth(buttons_cluster[counter].button_word) / 2);
+    buttons_cluster[counter].button_underlinebeginy = ((buttons_cluster[counter].button_beginy * 2 + buttons_cluster[counter].button_endx) / 2) + (font.stringHeight(buttons_cluster[counter].button_word) / 2);
+    buttons_cluster[counter].button_underlinelenght = font.stringWidth(buttons_cluster[counter].button_word);
   }
-  
+
   /*view logo and hogehoge*/
   string str = "";
   while (getline(ifs, str)) {
     cout << str << endl;
   }
-  cout << "All settings complete." << "buttons_cluster:" << buttons_cluster.size() << "width:"<< to_string(ofGetWidth())<<"height:"<< to_string(ofGetHeight()) <<endl;
+  cout << "All settings complete." << "buttons_cluster:" << buttons_cluster.size() << "width:"<< ofGetWidth() <<"height:"<< ofGetHeight() <<endl;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-  switch (screen){//screen‚ÌØ‚è‘Ö‚¦
+  switch (screen){//screenã®åˆ‡ã‚Šæ›¿ãˆ
   case 0:
     buttons_cluster[1].button_enable = true;
     buttons_cluster[2].button_enable = true;
@@ -108,15 +116,15 @@ void ofApp::update() {
   }
   mousex = ofGetMouseX();
   mousey = ofGetMouseY();
-  for (int counter = 0; counter < buttons_cluster.size(); counter++) {//‰e‚Ìˆ—
+  for (int counter = 0; counter < buttons_cluster.size(); counter++) {//å½±ã®å‡¦ç†
     if ((buttons_cluster[counter].button_beginx <= mousex && buttons_cluster[counter].button_beginy <= mousey) && (buttons_cluster[counter].button_beginx+buttons_cluster[counter].button_endx >= mousex && buttons_cluster[counter].button_beginx+buttons_cluster[counter].button_endy >= mousey)) {
-      if (buttons_cluster[counter].button_shadowlengh < 10) {
-        buttons_cluster[counter].button_shadowlengh+=2;
+      if (buttons_cluster[counter].button_shadowlenght < 10) {
+        buttons_cluster[counter].button_shadowlenght+=2;
       }
     }
     else {
-      if (buttons_cluster[counter].button_shadowlengh > 0) {
-        buttons_cluster[counter].button_shadowlengh--;
+      if (buttons_cluster[counter].button_shadowlenght > 0) {
+        buttons_cluster[counter].button_shadowlenght--;
       }
     }
   }
@@ -124,7 +132,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-/*Šiq‚ğ•\¦*/
+/*æ ¼å­ã‚’è¡¨ç¤º*/
 #ifdef ALPHA
   ofSetColor(200, 200, 200);
   ofDrawLine(640, 0, 640, 720);
@@ -133,13 +141,19 @@ void ofApp::draw() {
   for (int counter = 0; counter < buttons_cluster.size(); counter++) {
     if (buttons_cluster[counter].button_enable) {
       ofSetColor(0, 0, 0, 100);
-      ofDrawRectangle(buttons_cluster[counter].button_beginx + 10, buttons_cluster[counter].button_beginy + 10, buttons_cluster[counter].button_endx + buttons_cluster[counter].button_shadowlengh, buttons_cluster[counter].button_endy + buttons_cluster[counter].button_shadowlengh);
+      ofDrawRectangle(buttons_cluster[counter].button_beginx + 10, buttons_cluster[counter].button_beginy + 10, buttons_cluster[counter].button_endx + buttons_cluster[counter].button_shadowlenght, buttons_cluster[counter].button_endy + buttons_cluster[counter].button_shadowlenght);
       ofSetColor(buttons_cluster[counter].button_r+10, buttons_cluster[counter].button_g+10, buttons_cluster[counter].button_b+10);
       ofDrawRectangle(buttons_cluster[counter].button_beginx, buttons_cluster[counter].button_beginy, buttons_cluster[counter].button_endx, buttons_cluster[counter].button_endy);
       ofSetColor(buttons_cluster[counter].button_r, buttons_cluster[counter].button_g, buttons_cluster[counter].button_b);
       ofDrawRectangle(buttons_cluster[counter].button_beginx+10, buttons_cluster[counter].button_beginy+10, buttons_cluster[counter].button_endx-20, buttons_cluster[counter].button_endy-20);
+      ofSetColor(buttons_cluster[counter].button_wordr - 100, buttons_cluster[counter].button_wordg - 100, buttons_cluster[counter].button_wordb - 100);
+      font.drawString(buttons_cluster[counter].button_word, buttons_cluster[counter].button_fontx + 2, buttons_cluster[counter].button_fonty + 2);
+      ofSetColor(buttons_cluster[counter].button_wordr-50, buttons_cluster[counter].button_wordg-50, buttons_cluster[counter].button_wordb-50);
+      font.drawString(buttons_cluster[counter].button_word, buttons_cluster[counter].button_fontx+1, buttons_cluster[counter].button_fonty+1);
       ofSetColor(buttons_cluster[counter].button_wordr, buttons_cluster[counter].button_wordg, buttons_cluster[counter].button_wordb);
       font.drawString(buttons_cluster[counter].button_word, buttons_cluster[counter].button_fontx, buttons_cluster[counter].button_fonty);
+      ofSetColor(255, 255, 255, 200);
+      ofDrawLine(buttons_cluster[counter].button_underlinebeginx, buttons_cluster[counter].button_underlinebeginy+5, buttons_cluster[counter].button_underlinebeginx + buttons_cluster[counter].button_underlinelenght, buttons_cluster[counter].button_underlinebeginy+5);
     }
   }
 }
