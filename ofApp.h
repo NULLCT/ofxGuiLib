@@ -11,7 +11,9 @@ public:
   int button_r = 141, button_g = 235, button_b = 208;//button color
   int button_wordr = 255, button_wordg = 255, button_wordb = 255;//word color
   string button_word = u8"ERROR!!!!\nエラーが発生しました!!!!\nERROR:class::buttondate.button_wordに\n文字が指定されていません\nCODE:(・o・)";//error message
-  bool button_enable = false;//button draw?
+  bool button_enable = true;//button draw?
+  bool button_enablesimplebox = false;//draw simply box
+  bool button_enableonlyword = false;//draw only word
   int button_shadowlenght = 0;//shadow lenght
   int button_fontx = 0, button_fonty = 0;//font draw position
   int button_underlinebeginx = 0, button_underlinebeginy = 0, button_underlinelenght = 0;
@@ -19,6 +21,7 @@ public:
 class ofApp : public ofBaseApp {
 public:
   void setup();
+  void btnsetup();
   void update();
   void draw();
   void keyPressed(int key);
@@ -33,9 +36,13 @@ public:
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
-  vector<buttondate> buttons_cluster;//in buttons
-  ofTrueTypeFont font;//in font
+  ofTrueTypeFont font;//font
+  ofImage piyohiko;
+  vector<vector<buttondate> > btn;
+  vector<string> isbnrawlist;//ISBNlist
+  vector<string> isbnsoldlist;//ISBNsoldlist
   int screen = 0;//screen num
-  int mousex = 0;
-  int mousey = 0;
+  int frame = 0;//count frame
+  int piyohikoy = 0;//piyohiko ypos
+  string inputisbn = "";//input isbn
 };
