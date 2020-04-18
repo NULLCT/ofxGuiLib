@@ -214,8 +214,6 @@ void ofApp::btnsetup() {
   /*screen 3*/
   btn[3].resize(3);
 
-
-
   /*set button pos*/
   for (int scrn = 0; scrn < btn.size(); scrn++) {
     for (int count = 0; count < btn[scrn].size(); count++) {
