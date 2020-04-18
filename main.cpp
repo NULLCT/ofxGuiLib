@@ -1,17 +1,20 @@
 ﻿#include "ofMain.h"
 #include "ofApp.h"
 int main() {
-  ofSetupOpenGL(1280, 720, OF_WINDOW);//OF_FULLSCREEN
+  cout << "begin openframeworks" << endl;
+  ofSetupOpenGL(1280, 720, OF_WINDOW);//OF_FULLSCREENは使わない
   ofRunApp(new ofApp());
+  cout << "ISBNCTRLSYS has been exited" << endl;
+  return 0;
 }
-//以下私的なメモ
 //TODO:
 /*
-  - 売却した際に諸々をファイルに書き込む設定を作る
-  - screen[2]のUIをわかりやすくする
+
 */
 /*
-  データ保持構造は以下のとおりです
+  - ここは日本語でいいけど少なくともofApp.cppとかの実装ファイルは英語使おうね...
+
+  - データ保持構造は以下のとおりです
     - すべての本のISBNを行ごとに記録したファイル...isbnrawlist.txt(読み書き)
     - 売却した本のISBNを行ごとに記録したファイル...isbnsoldlist.txt(読み書き)
     - 売却した本の中でも、クーポンを適用した本のISBNを行ごとに記録したファイル...isbncouponlist.txt(読み書き)
@@ -31,8 +34,6 @@ int main() {
 #AA87FF purpule
 */
 //以下は画面構成。screen変数を操作することによって画面切り替えをする。
-//最悪データのcsvを弄る...?
-//portableVSCode持ってこよう
 /*
 seet 0:
   0:[委員でログイン]1:[管理でログイン]
@@ -48,11 +49,8 @@ seet 2:本売却
   3:[チェックボックス]
   4:[確定]
   5:[アラート(この本はもう売れているはず...とか)]
-seet 3:本一覧/検索
-  [ISBNhogehoge]	[検索バー]
-  [ISBNhogehoge]  [ヒットした本]
-  [ISBNhogehoge]  [以下の本に対しての操作]
-  .
+  6:[入力取消]
+  
 seet 4:使い方
   [動画とか再生しておこう！]
 seet 5:何かあったらこのボタンを押そう！
