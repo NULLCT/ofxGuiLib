@@ -1,4 +1,4 @@
-# YBTS
+# ISBNCTRLSYS
 ## 本をISBNで管理するシステム
 ### 使用ライブラリ
 - openframeworks
