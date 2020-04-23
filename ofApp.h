@@ -37,8 +37,9 @@ public:
   void gotMessage(ofMessage msg);
 
   ofTrueTypeFont font;//font
-  ofImage piyohiko;
-  vector<vector<buttondate> > btn;
+  ofImage piyohiko;//piyohiko
+  ofVideoPlayer expmovie;//exp movie(How to use???)
+  vector<vector<buttondate> > btn;//button
   vector<string> isbnrawlist;//ISBNlist
   vector<string> isbnsoldlist;//ISBNsoldlist
   int screen = 0;//screen num

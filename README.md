@@ -11,3 +11,6 @@
 - text.txt(screen[2]に表示されるであろう文字を格納)
 #### 以下は.exeと同じパスにあるdate/に格納。必須:
 - JKGM.ttf(JKフォントM。このリポジトリに入れるとライセンスがめんどくさくなりそうなので省いた):http://font.cutegirl.jp/category/font/jk-font
+### キー判定について
+- f ウィンドウをリサイズ
+- h ホームに戻る

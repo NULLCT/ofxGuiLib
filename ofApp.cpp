@@ -10,7 +10,7 @@ void ofApp::setup() {
     cout << "ERROR:fail load logo." << endl;
   }
   else {
-    /*view logo and hogehoge*/
+    /*print logo and hogehoge*/
     string logostr = "";
     while (getline(logo, logostr)) {
       cout << logostr << endl;
@@ -60,6 +60,9 @@ void ofApp::setup() {
   /*summoning piyohiko!!!*/
   piyohiko.load("Piyohiko.png");
 
+  /*load expmovie.mp4*/
+  expmovie.load("expmovie.mp4");
+
   printf("%-32s", "setting openframeworks...");
   printf("50\%");
   printf("\n");
@@ -107,6 +110,15 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::btnsetup() {
+  screen = 0;
+  /*
+    Why btnsetup has "screen=0"?:
+    btnsetup is rewrite all vector btn settings.
+    so if it draw "hogehoge",and run btnsetup(),
+    "hogehoge" will be changed.
+    that's why.
+  */
+
   /*screen size*/
   btn.resize(7);
 
@@ -212,7 +224,13 @@ void ofApp::btnsetup() {
   btn[2][6].button_word = u8"入力を削除";
 
   /*screen 3*/
-  btn[3].resize(3);
+  btn[3].resize(1);
+  
+  btn[3][0].button_beginx = 0 + 25;
+  btn[3][0].button_beginy = 0 + 25;
+  btn[3][0].button_endx = ofGetWidth() - 50;
+  btn[3][0].button_endy = ofGetHeight() - 50;
+  btn[3][0].button_word = u8"動画を再生";
 
   /*set button pos*/
   for (int scrn = 0; scrn < btn.size(); scrn++) {
@@ -250,6 +268,7 @@ void ofApp::update() {
 
   frame++;
   if (frame % 60 == 0) piyohikoy = ofRandom(ofGetHeight());
+  expmovie.update();
 }
 
 //--------------------------------------------------------------
@@ -291,12 +310,18 @@ void ofApp::draw() {
   }
   /*draw piyohiko*/
   piyohiko.draw(ofGetWidth() * sin(frame / 128.0), piyohikoy);
+  if (expmovie.isFrameNew()) {
+    expmovie.draw(0, 0, ofGetWidth(), ofGetHeight());
+  }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   if (key == 'f') {
     ofSetWindowShape(1280, 720);
+  }
+  if (key == 'h') {
+    screen = 0;
   }
   /*if screen is 2: begin isbn input system...*/
   if (screen != 2) {
@@ -392,10 +417,10 @@ void ofApp::mousePressed(int x, int y, int button){
         case 1:
           break;
         case 2:
-          screen = 4;
+          screen = 3;
           break;
         case 3:
-          screen = 5;
+          screen = 4;
           break;
         }
         break;
@@ -433,10 +458,28 @@ void ofApp::mousePressed(int x, int y, int button){
           }
           for (int count = 0; count < isbnrawlist.size(); count++) {
             if (isbnrawlist[count] == inputisbn) {
-              isbnsoldlist.push_back(inputisbn);
-              btn[2][5].button_word = u8"ISBN: " + inputisbn + u8"の売却しました。";
-              btn[2][5].button_enable = true;
-              return;
+              ofstream file_isbnsoldlist,file_isbncouponlist;
+              file_isbnsoldlist.open("isbnsoldlist.txt",ios::app);
+              file_isbncouponlist.open("isbncouponlist.txt",ios::app);
+              if (file_isbnsoldlist.fail() or file_isbncouponlist.fail()) {/*fail load file*/
+                btn[2][5].button_word = u8"ファイルの読み込みに失敗しました。:(";
+                btn[2][5].button_enable = true;
+                file_isbnsoldlist.close();
+                file_isbncouponlist.close();
+                return;
+              }
+              else {/*did load file*/
+                file_isbnsoldlist << inputisbn << "\n";
+                if (btn[2][3].button_word == u8"クーポンを使う") {
+                  file_isbncouponlist << inputisbn << "\n";
+                }
+                isbnsoldlist.push_back(inputisbn);
+                btn[2][5].button_word = u8"ISBN: " + inputisbn + u8"の売却しました。";
+                btn[2][5].button_enable = true;
+                file_isbnsoldlist.close();
+                file_isbncouponlist.close();
+                return;
+              }
             }
           }
           btn[2][5].button_word = u8"ISBN: " + inputisbn + u8"は見つかりませんでした。入力ミス??";
@@ -450,6 +493,8 @@ void ofApp::mousePressed(int x, int y, int button){
           btn[2][2].button_word = "ISBN: " + inputisbn;
           break;
         }
+        break;
+      case 3:
         break;
       }
     }
@@ -470,7 +515,6 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-  screen = 0;
   btnsetup();
 }
 
