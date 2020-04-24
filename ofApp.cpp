@@ -308,34 +308,10 @@ void ofApp::draw() {
       ofDrawLine(btn[screen][count].button_underlinebeginx, btn[screen][count].button_underlinebeginy + 5, btn[screen][count].button_underlinebeginx + btn[screen][count].button_underlinelenght, btn[screen][count].button_underlinebeginy + 5);
     }
   }
-
   /*draw piyohiko*/
   piyohiko.draw(ofGetWidth() * sin(frame / 128.0), piyohikoy);
   if (expmovie.isFrameNew()) {
     expmovie.draw(0, 0, ofGetWidth(), ofGetHeight());
-  }
-
-  /*draw path*/
-  ofSetColor(0, 0, 0,100);
-  switch (screen) {
-  case 0:
-    font.drawString(u8"/", 0, 30);
-    break;
-  case 1:
-    font.drawString(u8"/委員でログイン", 0, 30);
-    break;
-  case 2:
-    font.drawString(u8"/委員でログイン/本売却", 0, 30);
-    break;
-  case 3:
-    font.drawString(u8"/委員でログイン/使い方", 0, 30);
-    break;
-  case 4:
-    font.drawString(u8"/委員でログイン/何かあったら...", 0, 30);
-    break;
-  case 5:
-    font.drawString(u8"/管理でログイン", 0, 30);
-    break;
   }
 }
 
