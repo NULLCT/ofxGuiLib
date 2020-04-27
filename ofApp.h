@@ -38,7 +38,6 @@ public:
 
   ofTrueTypeFont font;//font
   ofImage piyohiko;//piyohiko
-  ofVideoPlayer expmovie;//exp movie(How to use???)
   vector<vector<buttondate> > btn;//button
   vector<string> isbnrawlist;//ISBNlist
   vector<string> isbnsoldlist;//ISBNsoldlist

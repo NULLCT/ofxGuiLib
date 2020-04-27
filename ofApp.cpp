@@ -60,9 +60,6 @@ void ofApp::setup() {
   /*summoning piyohiko!!!*/
   piyohiko.load("Piyohiko.png");
 
-  /*load expmovie.mp4*/
-  expmovie.load("expmovie.mp4");
-
   printf("%-32s", "setting openframeworks...");
   printf("50\%");
   printf("\n");
@@ -268,7 +265,6 @@ void ofApp::update() {
 
   frame++;
   if (frame % 60 == 0) piyohikoy = ofRandom(ofGetHeight());
-  expmovie.update();
 }
 
 //--------------------------------------------------------------
@@ -311,9 +307,6 @@ void ofApp::draw() {
 
   /*draw piyohiko*/
   piyohiko.draw(ofGetWidth() * sin(frame / 128.0), piyohikoy);
-  if (expmovie.isFrameNew()) {
-    expmovie.draw(0, 0, ofGetWidth(), ofGetHeight());
-  }
 
   /*draw path*/
   ofSetColor(0, 0, 0,100);
