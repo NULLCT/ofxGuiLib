@@ -18,6 +18,12 @@ public:
   int button_fontx = 0, button_fonty = 0;//font draw position
   int button_underlinebeginx = 0, button_underlinebeginy = 0, button_underlinelenght = 0;
 };
+struct isbndate {
+public:
+  string isbn = "";
+  bool coupon = false;
+  int sum = 0;
+};
 class ofApp : public ofBaseApp {
 public:
   void setup();
@@ -36,11 +42,12 @@ public:
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
-  ofTrueTypeFont font;//font
-  ofImage piyohiko;//piyohiko
-  vector<vector<buttondate> > btn;//button
-  vector<string> isbnrawlist;//ISBNlist
-  vector<string> isbnsoldlist;//ISBNsoldlist
+  ofTrueTypeFont font;//font JKGM.ttf
+  ofImage piyohiko;//piyohiko piyohiko.png
+  vector<vector<buttondate> > btn;//button screen to button
+  vector<string> isbnrawlist;//ISBNlist isbrawlist.txt
+  vector<string> isbnsoldlist;//ISBNsoldlist isbnsoldlist.txt
+  vector<isbndate> screen2_isbndates;//books list in screen2 has{string(isbn),bool(coupon),int(sum)}
   int screen = 0;//screen num
   int frame = 0;//count frame
   int piyohikoy = 0;//piyohiko ypos

@@ -163,62 +163,304 @@ void ofApp::btnsetup() {
   btn[1][3].button_word = u8"何かあったら";
 
   /*screen 2*/
-  btn[2].resize(7);
+  btn[2].resize(29);
 
   btn[2][0].button_beginx = 0 + 25;
   btn[2][0].button_beginy = 0 + 25;
-  btn[2][0].button_endx = ofGetWidth() / 2 - 50;
-  btn[2][0].button_endy = ofGetHeight() / 4 - 50;
+  btn[2][0].button_endx = ofGetWidth()*4 / 8 - 50;
+  btn[2][0].button_endy = ofGetHeight()*2 / 8 - 50;
   btn[2][0].button_r = 0xFF;
   btn[2][0].button_g = 0xCB;
   btn[2][0].button_b = 0x6F;
   btn[2][0].button_word = u8"バーコードをスキャンしてね!!";
   btn[2][0].button_enablesimplebox = true;
 
-  btn[2][1].button_beginx = 0 + 25;
-  btn[2][1].button_beginy = ofGetHeight() / 4 + 25;
-  btn[2][1].button_endx = ofGetWidth() / 2 - 50;
-  btn[2][1].button_endy = ofGetHeight() / 4 - 50;
-  btn[2][1].button_word = u8"(クーポンを使うなら右のボタンをクリック)\n(標準だとクーポンは使わない設定です)";
-  btn[2][1].button_enableonlyword = true;
+  btn[2][1].button_beginx = 0 + 10;
+  btn[2][1].button_beginy = ofGetHeight()*2 / 8 + 10;
+  btn[2][1].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][1].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][1].button_r = 255;
+  btn[2][1].button_g = 155;
+  btn[2][1].button_b = 84;
+  btn[2][1].button_word = u8"No#";
+  btn[2][1].button_enablesimplebox = true;
 
-  btn[2][2].button_beginx = 0 + 25;
-  btn[2][2].button_beginy = ofGetHeight() / 2 + 25;
-  btn[2][2].button_endx = ofGetWidth() / 2 - 50;
-  btn[2][2].button_endy = ofGetHeight() / 2 - 50;
-  btn[2][2].button_word = u8"ISBNを入力してください...";
+  btn[2][2].button_beginx = ofGetWidth() / 8 + 10;
+  btn[2][2].button_beginy = ofGetHeight()*2 / 8 + 10;
+  btn[2][2].button_endx = ofGetWidth()*3 / 8 - 20;
+  btn[2][2].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][2].button_r = 255;
+  btn[2][2].button_g = 155;
+  btn[2][2].button_b = 84;
+  btn[2][2].button_word = u8"バーコード";
   btn[2][2].button_enablesimplebox = true;
 
-  btn[2][3].button_beginx = ofGetWidth() / 2 + 25;
-  btn[2][3].button_beginy = 0 + 25;
-  btn[2][3].button_endx = ofGetWidth() / 2 - 50;
-  btn[2][3].button_endy = ofGetHeight() / 4 * 3 - 50;
-  btn[2][3].button_word = u8"クーポンを使わない";
+  btn[2][3].button_beginx = ofGetWidth()*4 / 8 + 10;
+  btn[2][3].button_beginy = ofGetHeight()*2 / 8 + 10;
+  btn[2][3].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][3].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][3].button_r = 255;
+  btn[2][3].button_g = 155;
+  btn[2][3].button_b = 84;
+  btn[2][3].button_word = u8"クーポン";
+  btn[2][3].button_enablesimplebox = true;
 
-  btn[2][4].button_beginx = ofGetWidth() / 2 + 25;
-  btn[2][4].button_beginy = ofGetHeight() / 4 * 3 + 25;
-  btn[2][4].button_endx = ofGetWidth() / 2 - 50;
-  btn[2][4].button_endy = ofGetHeight() / 4 - 50;
-  btn[2][4].button_r = 0xE8;
-  btn[2][4].button_g = 0x5A;
-  btn[2][4].button_b = 0x5E;
-  btn[2][4].button_word = u8"確定";
+  btn[2][4].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][4].button_beginy = ofGetHeight()*2 / 8 + 10;
+  btn[2][4].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][4].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][4].button_r = 237;
+  btn[2][4].button_g = 142;
+  btn[2][4].button_b = 84;
+  btn[2][4].button_word = u8"価格";
+  btn[2][4].button_enablesimplebox = true;
 
-  btn[2][5].button_beginx = 0 + 100;
-  btn[2][5].button_beginy = 0 + 100;
-  btn[2][5].button_endx = ofGetWidth() - 200;
-  btn[2][5].button_endy = ofGetHeight() - 200;
-  btn[2][5].button_r = 0xE8;
-  btn[2][5].button_g = 0x5A;
-  btn[2][5].button_b = 0x5E;
-  btn[2][5].button_word = u8"アラートボタン";
-  btn[2][5].button_enable = false;
+  //---------↓isbnlist----------
 
-  btn[2][6].button_beginx = 0 + 25;
-  btn[2][6].button_beginy = ofGetHeight() / 4*3 + 25;
-  btn[2][6].button_endx = ofGetWidth() / 4 - 50;
-  btn[2][6].button_endy = ofGetHeight() / 4 - 50;
-  btn[2][6].button_word = u8"入力を削除";
+  btn[2][5].button_beginx = 0 + 10;
+  btn[2][5].button_beginy = ofGetHeight()*3 / 8 + 5;
+  btn[2][5].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][5].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][5].button_r = 0xFF;
+  btn[2][5].button_g = 0xCB;
+  btn[2][5].button_b = 0x6F;
+  btn[2][5].button_word = u8"";
+  btn[2][5].button_enablesimplebox = true;
+
+  btn[2][6].button_beginx = ofGetWidth() / 8 + 10;
+  btn[2][6].button_beginy = ofGetHeight()*3 / 8 + 5;
+  btn[2][6].button_endx = ofGetWidth()*3 / 8 - 20;
+  btn[2][6].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][6].button_r = 0xFF;
+  btn[2][6].button_g = 0xCB;
+  btn[2][6].button_b = 0x6F;
+  btn[2][6].button_word = u8"";
+  btn[2][6].button_enablesimplebox = true;
+
+  btn[2][7].button_beginx = ofGetWidth()*4 / 8 + 10;
+  btn[2][7].button_beginy = ofGetHeight()*3 / 8 + 5;
+  btn[2][7].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][7].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][7].button_r = 0xff;
+  btn[2][7].button_g = 0xcb;
+  btn[2][7].button_b = 0x6f;
+  btn[2][7].button_word = u8"";
+  btn[2][7].button_enablesimplebox = true;
+
+  btn[2][8].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][8].button_beginy = ofGetHeight()*3 / 8 + 5;
+  btn[2][8].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][8].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][8].button_r = 0xff;
+  btn[2][8].button_g = 0xcb;
+  btn[2][8].button_b = 0x6f;
+  btn[2][8].button_word = u8"";
+  btn[2][8].button_enablesimplebox = true;
+
+  btn[2][9].button_beginx = 0 + 10;
+  btn[2][9].button_beginy = ofGetHeight()*4 / 8 + 5;
+  btn[2][9].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][9].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][9].button_r = 0xFF;
+  btn[2][9].button_g = 0xCB;
+  btn[2][9].button_b = 0x6F;
+  btn[2][9].button_word = u8"";
+  btn[2][9].button_enablesimplebox = true;
+
+  btn[2][10].button_beginx = ofGetWidth() / 8 + 10;
+  btn[2][10].button_beginy = ofGetHeight()*4 / 8 + 5;
+  btn[2][10].button_endx = ofGetWidth()*3 / 8 - 20;
+  btn[2][10].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][10].button_r = 0xFF;
+  btn[2][10].button_g = 0xCB;
+  btn[2][10].button_b = 0x6F;
+  btn[2][10].button_word = u8"";
+  btn[2][10].button_enablesimplebox = true;
+
+  btn[2][11].button_beginx = ofGetWidth()*4 / 8 + 10;
+  btn[2][11].button_beginy = ofGetHeight()*4 / 8 + 5;
+  btn[2][11].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][11].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][11].button_r = 0xff;
+  btn[2][11].button_g = 0xcb;
+  btn[2][11].button_b = 0x6f;
+  btn[2][11].button_word = u8"";
+  btn[2][11].button_enablesimplebox = true;
+
+  btn[2][12].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][12].button_beginy = ofGetHeight()*4 / 8 + 5;
+  btn[2][12].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][12].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][12].button_r = 0xff;
+  btn[2][12].button_g = 0xcb;
+  btn[2][12].button_b = 0x6f;
+  btn[2][12].button_word = u8"";
+  btn[2][12].button_enablesimplebox = true;
+
+
+  btn[2][13].button_beginx = 0 + 10;
+  btn[2][13].button_beginy = ofGetHeight()*5 / 8 + 5;
+  btn[2][13].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][13].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][13].button_r = 0xFF;
+  btn[2][13].button_g = 0xCB;
+  btn[2][13].button_b = 0x6F;
+  btn[2][13].button_word = u8"";
+  btn[2][13].button_enablesimplebox = true;
+
+  btn[2][14].button_beginx = ofGetWidth() / 8 + 10;
+  btn[2][14].button_beginy = ofGetHeight()*5 / 8 + 5;
+  btn[2][14].button_endx = ofGetWidth()*3 / 8 - 20;
+  btn[2][14].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][14].button_r = 0xFF;
+  btn[2][14].button_g = 0xCB;
+  btn[2][14].button_b = 0x6F;
+  btn[2][14].button_word = u8"";
+  btn[2][14].button_enablesimplebox = true;
+
+  btn[2][15].button_beginx = ofGetWidth()*4 / 8 + 10;
+  btn[2][15].button_beginy = ofGetHeight()*5 / 8 + 5;
+  btn[2][15].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][15].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][15].button_r = 0xff;
+  btn[2][15].button_g = 0xcb;
+  btn[2][15].button_b = 0x6f;
+  btn[2][15].button_word = u8"";
+  btn[2][15].button_enablesimplebox = true;
+
+  btn[2][16].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][16].button_beginy = ofGetHeight()*5 / 8 + 5;
+  btn[2][16].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][16].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][16].button_r = 0xff;
+  btn[2][16].button_g = 0xcb;
+  btn[2][16].button_b = 0x6f;
+  btn[2][16].button_word = u8"";
+  btn[2][16].button_enablesimplebox = true;
+
+  btn[2][17].button_beginx = 0 + 10;
+  btn[2][17].button_beginy = ofGetHeight()*6 / 8 + 5;
+  btn[2][17].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][17].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][17].button_r = 0xFF;
+  btn[2][17].button_g = 0xCB;
+  btn[2][17].button_b = 0x6F;
+  btn[2][17].button_word = u8"";
+  btn[2][17].button_enablesimplebox = true;
+
+  btn[2][18].button_beginx = ofGetWidth() / 8 + 10;
+  btn[2][18].button_beginy = ofGetHeight()*6 / 8 + 5;
+  btn[2][18].button_endx = ofGetWidth()*3 / 8 - 20;
+  btn[2][18].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][18].button_r = 0xFF;
+  btn[2][18].button_g = 0xCB;
+  btn[2][18].button_b = 0x6F;
+  btn[2][18].button_word = u8"";
+  btn[2][18].button_enablesimplebox = true;
+
+  btn[2][19].button_beginx = ofGetWidth()*4 / 8 + 10;
+  btn[2][19].button_beginy = ofGetHeight()*6 / 8 + 5;
+  btn[2][19].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][19].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][19].button_r = 0xff;
+  btn[2][19].button_g = 0xcb;
+  btn[2][19].button_b = 0x6f;
+  btn[2][19].button_word = u8"";
+  btn[2][19].button_enablesimplebox = true;
+
+  btn[2][20].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][20].button_beginy = ofGetHeight()*6 / 8 + 5;
+  btn[2][20].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][20].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][20].button_r = 0xff;
+  btn[2][20].button_g = 0xcb;
+  btn[2][20].button_b = 0x6f;
+  btn[2][20].button_word = u8"";
+  btn[2][20].button_enablesimplebox = true;
+
+  btn[2][21].button_beginx = 0 + 10;
+  btn[2][21].button_beginy = ofGetHeight()*7 / 8 + 5;
+  btn[2][21].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][21].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][21].button_r = 0xFF;
+  btn[2][21].button_g = 0xCB;
+  btn[2][21].button_b = 0x6F;
+  btn[2][21].button_word = u8"";
+  btn[2][21].button_enablesimplebox = true;
+
+  btn[2][22].button_beginx = ofGetWidth() / 8 + 10;
+  btn[2][22].button_beginy = ofGetHeight()*7 / 8 + 5;
+  btn[2][22].button_endx = ofGetWidth()*3 / 8 - 20;
+  btn[2][22].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][22].button_r = 0xFF;
+  btn[2][22].button_g = 0xCB;
+  btn[2][22].button_b = 0x6F;
+  btn[2][22].button_word = u8"";
+  btn[2][22].button_enablesimplebox = true;
+
+  btn[2][23].button_beginx = ofGetWidth()*4 / 8 + 10;
+  btn[2][23].button_beginy = ofGetHeight()*7 / 8 + 5;
+  btn[2][23].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][23].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][23].button_r = 0xff;
+  btn[2][23].button_g = 0xcb;
+  btn[2][23].button_b = 0x6f;
+  btn[2][23].button_word = u8"";
+  btn[2][23].button_enablesimplebox = true;
+
+  btn[2][24].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][24].button_beginy = ofGetHeight()*7 / 8 + 5;
+  btn[2][24].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][24].button_endy = ofGetHeight() / 8 - 10;
+  btn[2][24].button_r = 0xff;
+  btn[2][24].button_g = 0xcb;
+  btn[2][24].button_b = 0x6f;
+  btn[2][24].button_word = u8"";
+  btn[2][24].button_enablesimplebox = true;
+
+//-----------------↑isbnlist----------------------
+//-----------------↓sumlist-----------------------
+
+  btn[2][25].button_beginx = ofGetWidth()*6 / 8 + 10;
+  btn[2][25].button_beginy = ofGetHeight()*3 / 8 + 10;
+  btn[2][25].button_endx = ofGetWidth()*2 / 8 - 20;
+  btn[2][25].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][25].button_r = 0xff;
+  btn[2][25].button_g = 0xcb;
+  btn[2][25].button_b = 0x6f;
+  btn[2][25].button_word = u8"小計:0円";
+  btn[2][25].button_enablesimplebox = true;
+
+  btn[2][26].button_beginx = ofGetWidth()*6 / 8 + 10;
+  btn[2][26].button_beginy = ofGetHeight()*4 / 8 + 10;
+  btn[2][26].button_endx = ofGetWidth()*2 / 8 - 20;
+  btn[2][26].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][26].button_r = 0xff;
+  btn[2][26].button_g = 0xcb;
+  btn[2][26].button_b = 0x6f;
+  btn[2][26].button_word = u8"クーポン:0個";
+  btn[2][26].button_enablesimplebox = true;
+
+  btn[2][27].button_beginx = ofGetWidth()*6 / 8 + 10;
+  btn[2][27].button_beginy = ofGetHeight()*5 / 8 + 10;
+  btn[2][27].button_endx = ofGetWidth()*2 / 8 - 20;
+  btn[2][27].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][27].button_r = 255;
+  btn[2][27].button_g = 136;
+  btn[2][27].button_b = 122;
+  btn[2][27].button_word = u8"合計:0円";
+  btn[2][27].button_enablesimplebox = true;
+
+//----------------↓okbutton---------------------
+
+  btn[2][28].button_beginx = ofGetWidth()*6 / 8 + 10;
+  btn[2][28].button_beginy = ofGetHeight()*6 / 8 + 10;
+  btn[2][28].button_endx = ofGetWidth()*2 / 8 - 20;
+  btn[2][28].button_endy = ofGetHeight()*2 / 8 - 20;
+  btn[2][28].button_r = 255;
+  btn[2][28].button_g = 84;
+  btn[2][28].button_b = 84;
+  btn[2][28].button_word = u8"確定";
 
   /*screen 3*/
   btn[3].resize(1);
@@ -227,7 +469,7 @@ void ofApp::btnsetup() {
   btn[3][0].button_beginy = 0 + 25;
   btn[3][0].button_endx = ofGetWidth() - 50;
   btn[3][0].button_endy = ofGetHeight() - 50;
-  btn[3][0].button_word = u8"動画を再生";
+  btn[3][0].button_word = u8"デスクトップにある動画を見てね！";
 
   /*set button pos*/
   for (int scrn = 0; scrn < btn.size(); scrn++) {
@@ -302,6 +544,13 @@ void ofApp::draw() {
 
       ofSetColor(255, 255, 255, 200);//buttonword underline
       ofDrawLine(btn[screen][count].button_underlinebeginx, btn[screen][count].button_underlinebeginy + 5, btn[screen][count].button_underlinebeginx + btn[screen][count].button_underlinelenght, btn[screen][count].button_underlinebeginy + 5);
+    }
+    if (screen == 2) {//draw partation
+      ofSetColor(240, 240, 240, 200);
+      ofDrawLine(ofGetWidth()*1 / 8, ofGetHeight()*2 / 8, ofGetWidth()*1 / 8, ofGetHeight()*8 / 8-10);
+      ofDrawLine(ofGetWidth()*4 / 8, ofGetHeight()*2 / 8, ofGetWidth()*4 / 8, ofGetHeight()*8 / 8-10);
+      ofDrawLine(ofGetWidth()*5 / 8, ofGetHeight()*2 / 8, ofGetWidth()*5 / 8, ofGetHeight()*8 / 8-10);
+      ofDrawLine(ofGetWidth()*6 / 8, ofGetHeight()*2 / 8, ofGetWidth()*6 / 8, ofGetHeight()*8 / 8-10);
     }
   }
 
@@ -395,24 +644,20 @@ void ofApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key)
-{
+void ofApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y)
-{
-
+void ofApp::mouseMoved(int x, int y){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button)
-{
-
+void ofApp::mouseDragged(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能はここに書く
+
   for (int count = 0; count < btn[screen].size(); count++){
     if ((btn[screen][count].button_beginx <= x && btn[screen][count].button_beginy <= y) && (btn[screen][count].button_beginx + btn[screen][count].button_endx >= x && btn[screen][count].button_beginy + btn[screen][count].button_endy >= y)) {
       switch (screen) {
@@ -443,72 +688,7 @@ void ofApp::mousePressed(int x, int y, int button){
         break;
       case 2:
         switch (count) {
-        case 0:
-          break;
-        case 1:
-          break;
-        case 2:
-          break;
-        case 3:
-          if (btn[2][3].button_word == u8"クーポンを使う") {
-            btn[2][3].button_word = u8"クーポンを使わない";
-            btn[2][3].button_r = 141;
-            btn[2][3].button_g = 235;
-            btn[2][3].button_b = 208;
-            cout << "btn[2][3].disable => enable" << endl;
-          }
-          else {
-            btn[2][3].button_word = u8"クーポンを使う";
-            btn[2][3].button_r = 0xE8;
-            btn[2][3].button_g = 0x5A;
-            btn[2][3].button_b = 0x5E;
-            cout << "btn[2][3].enable => disable" << endl;
-          }
-          break;
-        case 4:
-          for (int count = 0; count < isbnsoldlist.size(); count++) {
-            if (isbnsoldlist[count] == inputisbn) {
-              btn[2][5].button_word = u8"ISBN: " + inputisbn + u8"は既に売れています。";
-              btn[2][5].button_enable = true;
-              return;
-            }
-          }
-          for (int count = 0; count < isbnrawlist.size(); count++) {
-            if (isbnrawlist[count] == inputisbn) {
-              ofstream file_isbnsoldlist,file_isbncouponlist;
-              file_isbnsoldlist.open("isbnsoldlist.txt",ios::app);
-              file_isbncouponlist.open("isbncouponlist.txt",ios::app);
-              if (file_isbnsoldlist.fail() or file_isbncouponlist.fail()) {/*fail load file*/
-                btn[2][5].button_word = u8"ファイルの読み込みに失敗しました。:(";
-                btn[2][5].button_enable = true;
-                file_isbnsoldlist.close();
-                file_isbncouponlist.close();
-                return;
-              }
-              else {/*did load file*/
-                file_isbnsoldlist << inputisbn << "\n";
-                if (btn[2][3].button_word == u8"クーポンを使う") {
-                  file_isbncouponlist << inputisbn << "\n";
-                }
-                isbnsoldlist.push_back(inputisbn);
-                btn[2][5].button_word = u8"ISBN: " + inputisbn + u8"の売却しました。";
-                btn[2][5].button_enable = true;
-                file_isbnsoldlist.close();
-                file_isbncouponlist.close();
-                return;
-              }
-            }
-          }
-          btn[2][5].button_word = u8"ISBN: " + inputisbn + u8"は見つかりませんでした。入力ミス??";
-          btn[2][5].button_enable = true;
-          break;
-        case 5:
-          btn[2][5].button_enable = false;
-          break;
-        case 6:
-          inputisbn = "";
-          btn[2][2].button_word = "ISBN: " + inputisbn;
-          break;
+
         }
         break;
       case 3:
