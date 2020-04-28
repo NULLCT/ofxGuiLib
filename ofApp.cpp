@@ -171,7 +171,7 @@ void ofApp::btnsetup() {
   btn[1][3].button_word = u8"何かあったら";
 
   /*screen 2*/
-  btn[2].resize(28);
+  btn[2].resize(29);
 
   btn[2][0].button_beginx = 0 + 25;
   btn[2][0].button_beginy = 0 + 25;
@@ -433,6 +433,17 @@ void ofApp::btnsetup() {
   btn[2][25].button_endy = ofGetHeight()*1 / 8 - 20;
   btn[2][25].button_word = u8"全消去";
 
+  btn[2][26].button_beginx = ofGetWidth()*7 / 8 + 10;
+  btn[2][26].button_beginy = 0 + 10;
+  btn[2][26].button_endx = ofGetWidth()*1 / 8 - 20;
+  btn[2][26].button_endy = ofGetHeight()*1 / 8 - 20;
+  btn[2][26].button_word = u8"一枚追加";
+
+  btn[2][27].button_beginx = ofGetWidth()*7 / 8 + 10;
+  btn[2][27].button_beginy = ofGetHeight()*2 / 8 + 10;
+  btn[2][27].button_endx = ofGetWidth()*1 / 8 - 20;
+  btn[2][27].button_endy = ofGetHeight()*1 / 8 - 20;
+  btn[2][27].button_word = u8"一枚削除";
 
   /*screen 3*/
   btn[3].resize(1);
@@ -830,6 +841,7 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
           break;
         case 25:
           screen2_scrool_begin = 0;
+          screen2_coupon = 0;
           screen2_isbndates.clear();
 
           btn[2][5].button_word = "";
@@ -837,6 +849,19 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
           btn[2][11].button_word = "";
           btn[2][14].button_word = "";
           btn[2][17].button_word = "";
+
+          break;
+        case 26:
+          cout << "clicked" <<screen2_coupon<< endl;
+          screen2_coupon++;
+          btn[2][20].button_word = u8"クーポン:" + to_string(screen2_coupon) + u8"個";
+          break;
+        case 27:
+          cout << "clicked" <<screen2_coupon<< endl;
+          if (screen2_coupon != 0) {
+            screen2_coupon--;
+            btn[2][20].button_word = u8"クーポン:" + to_string(screen2_coupon) + u8"個";
+          }
           break;
         }
         break;
@@ -864,6 +889,7 @@ void ofApp::windowResized(int w, int h){
   btnsetup();
   screen2_isbndates.clear();
   screen2_scrool_begin = 0;
+  screen2_coupon = 0;
 }
 
 //--------------------------------------------------------------

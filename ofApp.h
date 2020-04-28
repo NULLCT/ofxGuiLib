@@ -47,5 +47,6 @@ public:
   string inputisbn = "";//input isbn
 
   int screen2_scrool_begin = 0;//screen2 scrool place
+  int screen2_coupon = 0;//count coupon
   vector<string> screen2_isbndates;//books list in screen2 has{string(isbn),int(sum)}
 };
