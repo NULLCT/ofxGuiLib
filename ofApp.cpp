@@ -171,7 +171,7 @@ void ofApp::btnsetup() {
   btn[1][3].button_word = u8"何かあったら";
 
   /*screen 2*/
-  btn[2].resize(25);
+  btn[2].resize(28);
 
   btn[2][0].button_beginx = 0 + 25;
   btn[2][0].button_beginy = 0 + 25;
@@ -427,6 +427,13 @@ void ofApp::btnsetup() {
   btn[2][24].button_b = 84;
   btn[2][24].button_word = u8"下";
 
+  btn[2][25].button_beginx = ofGetWidth()*5 / 8 + 10;
+  btn[2][25].button_beginy = ofGetHeight()*5 / 8 + 10;
+  btn[2][25].button_endx = ofGetWidth()*1 / 8 - 20;
+  btn[2][25].button_endy = ofGetHeight()*1 / 8 - 20;
+  btn[2][25].button_word = u8"全消去";
+
+
   /*screen 3*/
   btn[3].resize(1);
   
@@ -498,6 +505,11 @@ void ofApp::update() {
     btn[2][12].button_word = "";
     btn[2][15].button_word = "";
     btn[2][18].button_word = "";
+
+    btn[2][19].button_word = u8"小計:"+
+      to_string(screen2_isbndates.size()*BOOKCOST)+u8"円";
+    btn[2][20].button_word = u8"クーポン:0個";
+    btn[2][21].button_word = u8"総計:0円";
 
     if (screen2_isbndates.size() > screen2_scrool_begin) {
       btn[2][5].button_word = screen2_isbndates[screen2_scrool_begin];
@@ -646,8 +658,8 @@ void ofApp::draw() {
       ofDrawLine(
         0,
         ofGetHeight()*2 / 8,
-        ofGetWidth()*6 / 8,
-        ofGetHeight()*8 / 8-10
+        0,
+        ofGetHeight()*6 / 8
       );
     }
   }
@@ -729,7 +741,7 @@ void ofApp::keyPressed(int key){
         screen2_isbndates.push_back(inputisbn);
         inputisbn = "";
         if (screen2_isbndates.size() > 5) {
-          screen2_scrool_begin++;
+          screen2_scrool_begin=screen2_isbndates.size()-5;
         }
       }
     }
@@ -815,6 +827,16 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
           break;
         case 24:
           if(screen2_scrool_begin < screen2_isbndates.size()-5)screen2_scrool_begin++;
+          break;
+        case 25:
+          screen2_scrool_begin = 0;
+          screen2_isbndates.clear();
+
+          btn[2][5].button_word = "";
+          btn[2][8].button_word = "";
+          btn[2][11].button_word = "";
+          btn[2][14].button_word = "";
+          btn[2][17].button_word = "";
           break;
         }
         break;
