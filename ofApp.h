@@ -18,12 +18,6 @@ public:
   int button_fontx = 0, button_fonty = 0;//font draw position
   int button_underlinebeginx = 0, button_underlinebeginy = 0, button_underlinelenght = 0;
 };
-struct isbndate {
-public:
-  string isbn = "";
-  bool coupon = false;
-  int sum = 0;
-};
 class ofApp : public ofBaseApp {
 public:
   void setup();
@@ -47,9 +41,11 @@ public:
   vector<vector<buttondate> > btn;//button screen to button
   vector<string> isbnrawlist;//ISBNlist isbrawlist.txt
   vector<string> isbnsoldlist;//ISBNsoldlist isbnsoldlist.txt
-  vector<isbndate> screen2_isbndates;//books list in screen2 has{string(isbn),bool(coupon),int(sum)}
   int screen = 0;//screen num
   int frame = 0;//count frame
   int piyohikoy = 0;//piyohiko ypos
   string inputisbn = "";//input isbn
+
+  int screen2_scrool_begin = 0;//screen2 scrool place
+  vector<string> screen2_isbndates;//books list in screen2 has{string(isbn),int(sum)}
 };
