@@ -6,9 +6,11 @@
 void ofApp::setup() {
 
   /*load logo*/
+  cout<<"LOAD FILES:"<<endl;
+  cout<<"  logo"<<endl;
   ifstream logo("logo.txt");
   if (logo.fail()) {
-    cout << "ERROR:fail load logo." << endl;
+    cout << "  ERROR:fail load logo." << endl;
   }
   else {
     /*print logo and hogehoge*/
@@ -18,14 +20,7 @@ void ofApp::setup() {
     }
   }
 
-  printf("%-32s", "loaded logo...");
-  printf("10\%");
-  printf("\n");
-
-  printf("%-32s", "load isbnrawlist.txt...");
-  printf("20\%");
-  printf("\n");
-
+  cout<<"  isbnrawlist.txt"<<endl;
   /*load isbnrawlist*/
   ifstream rawlist("isbnrawlist.txt");
   if (rawlist.fail()) {
@@ -39,10 +34,8 @@ void ofApp::setup() {
     }
   }
 
-  printf("%-32s", "load isbnsoldlist.txt...");
-  printf("30\%");
-  printf("\n");
 
+  cout<<"  isbnsoldlist.txt"<<endl;
   /*load isbnsoldlist*/
   ifstream soldlist("isbnsoldlist.txt");
   if (soldlist.fail()) {
@@ -56,16 +49,11 @@ void ofApp::setup() {
     }
   }
 
-  printf("%-32s", "load Piyohiko.png...");
-  printf("40\%");
-  printf("\n");
-
+  cout<<"  picture"<<endl;
   /*summoning piyohiko!!!*/
   piyohiko.load("Piyohiko.png");
 
-  printf("%-32s", "setting openframeworks...");
-  printf("50\%");
-  printf("\n");
+  cout<<"  openframeworks_settings"<<endl;
   /*of setting*/
   ofSetBackgroundColor(222, 222, 222);
   ofSetFrameRate(60);
@@ -73,45 +61,36 @@ void ofApp::setup() {
   ofSetLineWidth(5);
   ofSetEscapeQuitsApp(false);
 
-  printf("%-32s", "loading font([Cica.ttf])...");
-  printf("60\%");
-  printf("\n");
+  cout<<"  font(Cica.ttf)"<<endl;
   /*font setting*/
   ofTrueTypeFontSettings fontsettings("Cica.ttf", 24);
-  printf("%-32s", "loading rang([Latin])...");
-  printf("70\%");
-  printf("\n");
+  cout<<"  load_Latin"<<endl;
   fontsettings.addRanges(ofAlphabet::Latin);
-  printf("%-32s", "loading rang([Japanese])...");
-  printf("80\%");
-  printf("\n");
+  cout<<"  load_Japanese"<<endl;
   fontsettings.addRanges(ofAlphabet::Japanese);
+  cout<<"  load_fontsettings"<<endl;
   font.load(fontsettings);
 
-  printf("%-32s", "setting screen...");
-  printf("90\%");
-  printf("\n");
+  cout<<"  set_screen"<<endl;
   /*screen setting*/
   screen = 0;
 
   /*button setup*/
-  printf("%-32s", "setting class::button...");
-  printf("99\%");
-  printf("\n");
+  cout<<"  class_button_setup"<<endl;
   screen2_isbndates.clear();
   btnsetup();
 
-  for (int scrn = 0; scrn < btn.size(); scrn++) {
-    for (int count = 0; count < btn[scrn].size(); count++) {
+  for (int scrn = 0; scrn < int(btn.size()); scrn++) {
+    for (int count = 0; count < int(btn[scrn].size()); count++) {
       cout << "  determined: |" << scrn << "/" << count << "|" << endl;
     }
   }
-  cout << "ISBNCTRLSYS has started. " 
-    << isbnsoldlist.size() 
-    << "/" 
-    << isbnrawlist.size() 
-    << " time: " 
-    << time(NULL) 
+  cout << "ISBNCTRLSYS has started. "
+    << isbnsoldlist.size()
+    << "/"
+    << isbnrawlist.size()
+    << " time: "
+    << time(NULL)
     << endl;
 }
 
@@ -419,7 +398,7 @@ void ofApp::btnsetup() {
   btn[2][23].button_g = 84;
   btn[2][23].button_b = 84;
   btn[2][23].button_word = u8"上";
-  
+
   btn[2][24].button_beginx = ofGetWidth()*5 / 8 + 10;
   btn[2][24].button_beginy = ofGetHeight()*7 / 8 + 10;
   btn[2][24].button_endx = ofGetWidth()*1 / 8 - 20;
@@ -466,11 +445,11 @@ void ofApp::btnsetup() {
   btn[2][30].button_endx = ofGetWidth()*8 / 8 - 20;
   btn[2][30].button_endy = ofGetHeight()*8 / 8 - 20;
   btn[2][30].button_word = u8"ERROR";
-  btn[2][30].enable=false;
+  btn[2][30].button_enable=false;
 
   /*screen 3*/
   btn[3].resize(1);
-  
+
   btn[3][0].button_beginx = 0 + 25;
   btn[3][0].button_beginy = 0 + 25;
   btn[3][0].button_endx = ofGetWidth() - 50;
@@ -478,15 +457,15 @@ void ofApp::btnsetup() {
   btn[3][0].button_word = u8"デスクトップにある動画を見てね！";
 
   /*set button pos*/
-  for (int scrn = 0; scrn < btn.size(); scrn++) {
-    for (int count = 0; count < btn[scrn].size(); count++) {
-      btn[scrn][count].button_fontx = 
+  for (int scrn = 0; scrn < int(btn.size()); scrn++) {
+    for (int count = 0; count < int(btn[scrn].size()); count++) {
+      btn[scrn][count].button_fontx =
         ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) - (font.stringWidth(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_fonty = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
         (font.stringHeight(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_underlinebeginx = ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
         (font.stringWidth(btn[scrn][count].button_word) / 2);
-      btn[scrn][count].button_underlinebeginy = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) + 
+      btn[scrn][count].button_underlinebeginy = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
         (font.stringHeight(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_underlinelenght = font.stringWidth(btn[scrn][count].button_word);
       if (btn[scrn][count].button_enableonlyword) {
@@ -500,12 +479,12 @@ void ofApp::btnsetup() {
 //--------------------------------------------------------------
 void ofApp::update() {
   /*set button shadow length*/
-  for (int count = 0; count < btn[screen].size(); count++) {
+  for (int count = 0; count < int(btn[screen].size()); count++) {
     if (!btn[screen][count].button_enablesimplebox) {
-      if ((btn[screen][count].button_beginx <= 
-        ofGetMouseX() && 
-        btn[screen][count].button_beginy <= 
-        ofGetMouseY()) && 
+      if ((btn[screen][count].button_beginx <=
+        ofGetMouseX() &&
+        btn[screen][count].button_beginy <=
+        ofGetMouseY()) &&
         (btn[screen][count].button_beginx + btn[screen][count].button_endx >=
           ofGetMouseX() &&
           btn[screen][count].button_beginy + btn[screen][count].button_endy >=
@@ -542,40 +521,40 @@ void ofApp::update() {
 
     btn[2][19].button_word = u8"小計:"+
       to_string(screen2_isbndates.size()*BOOKCOST)+u8"";
-    if(screen2_isbndates.size()<screen2_coupon){
+    if(int(screen2_isbndates.size())<screen2_coupon){
       btn[2][21].button_word = u8"総計:ERROR";
     }else{
       btn[2][21].button_word = u8"総計:"+to_string((screen2_isbndates.size()-screen2_coupon)*BOOKCOST);
     }
-    if (screen2_isbndates.size() > screen2_scrool_begin) {
+    if (int(screen2_isbndates.size()) > screen2_scrool_begin) {
       btn[2][5].button_word = screen2_isbndates[screen2_scrool_begin];
       btn[2][4].button_word = to_string(screen2_scrool_begin + 1);
       btn[2][6].button_word = to_string(BOOKCOST);
     }
-    if (screen2_isbndates.size() > screen2_scrool_begin + 1) {
+    if (int(screen2_isbndates.size()) > screen2_scrool_begin + 1) {
       btn[2][8].button_word = screen2_isbndates[screen2_scrool_begin + 1];
       btn[2][7].button_word = to_string(screen2_scrool_begin + 2);
       btn[2][9].button_word = to_string(BOOKCOST);
     }
-    if (screen2_isbndates.size() > screen2_scrool_begin + 2) {
+    if (int(screen2_isbndates.size()) > screen2_scrool_begin + 2) {
       btn[2][11].button_word = screen2_isbndates[screen2_scrool_begin + 2];
       btn[2][10].button_word = to_string(screen2_scrool_begin + 3);
       btn[2][12].button_word = to_string(BOOKCOST);
     }
-    if (screen2_isbndates.size() > screen2_scrool_begin + 3) {
+    if (int(screen2_isbndates.size()) > screen2_scrool_begin + 3) {
       btn[2][14].button_word = screen2_isbndates[screen2_scrool_begin + 3];
       btn[2][13].button_word = to_string(screen2_scrool_begin + 4);
       btn[2][15].button_word = to_string(BOOKCOST);
     }
-    if (screen2_isbndates.size() > screen2_scrool_begin + 4) {
+    if (int(screen2_isbndates.size()) > screen2_scrool_begin + 4) {
       btn[2][17].button_word = screen2_isbndates[screen2_scrool_begin + 4];
       btn[2][16].button_word = to_string(screen2_scrool_begin + 5);
       btn[2][18].button_word = to_string(BOOKCOST);
     }
 
     /*resize shadow and underline*/
-    for (int scrn = 0; scrn < btn.size(); scrn++) {
-      for (int count = 0; count < btn[scrn].size(); count++) {
+    for (int scrn = 0; scrn < int(btn.size()); scrn++) {
+      for (int count = 0; count < int(btn[scrn].size()); count++) {
         btn[scrn][count].button_fontx = ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
           (font.stringWidth(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_fonty = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
@@ -602,14 +581,14 @@ void ofApp::draw() {
   ofDrawLine(0, ofGetHeight() / 2, ofGetWidth(), ofGetHeight() / 2);
 #endif
   /*draw button*/
-  for (int count = 0; count < btn[screen].size(); count++) {
+  for (int count = 0; count < int(btn[screen].size()); count++) {
     if (btn[screen][count].button_enable) {
       if (!btn[screen][count].button_enablesimplebox) {
         ofSetColor(0, 0, 0, 100);//shadow
         ofDrawRectangle(
           btn[screen][count].button_beginx + 5,
-          btn[screen][count].button_beginy + 5, 
-          btn[screen][count].button_endx + btn[screen][count].button_shadowlenght, 
+          btn[screen][count].button_beginy + 5,
+          btn[screen][count].button_endx + btn[screen][count].button_shadowlenght,
           btn[screen][count].button_endy + btn[screen][count].button_shadowlenght
         );
         ofSetColor(
@@ -619,7 +598,7 @@ void ofApp::draw() {
         );//button outsidebox
         ofDrawRectangle(
           btn[screen][count].button_beginx,
-          btn[screen][count].button_beginy, 
+          btn[screen][count].button_beginy,
           btn[screen][count].button_endx,
           btn[screen][count].button_endy
         );
@@ -651,16 +630,16 @@ void ofApp::draw() {
         btn[screen][count].button_wordb - 50
       );//buttonword shadow 1
       font.drawString(btn[screen][count].button_word,
-        btn[screen][count].button_fontx + 1, 
+        btn[screen][count].button_fontx + 1,
         btn[screen][count].button_fonty + 1
       );
 
       ofSetColor(btn[screen][count].button_wordr,
         btn[screen][count].button_wordg,
         btn[screen][count].button_wordb
-      );//buttonword 
+      );//buttonword
       font.drawString(btn[screen][count].button_word,
-        btn[screen][count].button_fontx, 
+        btn[screen][count].button_fontx,
         btn[screen][count].button_fonty
       );
 
@@ -783,9 +762,9 @@ void ofApp::keyPressed(int key){
     }
 
     /*set button pos*/
-    for (int scrn = 0; scrn < btn.size(); scrn++) {
-      for (int count = 0; count < btn[scrn].size(); count++) {
-        btn[scrn][count].button_fontx = 
+    for (int scrn = 0; scrn < int(btn.size()); scrn++) {
+      for (int count = 0; count < int(btn[scrn].size()); count++) {
+        btn[scrn][count].button_fontx =
           ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
           (font.stringWidth(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_fonty =
@@ -824,11 +803,11 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能はここに書く
 
-  for (int count = 0; count < btn[screen].size(); count++){
+  for (int count = 0; count < int(btn[screen].size()); count++){
     if ((btn[screen][count].button_beginx <= x &&
       btn[screen][count].button_beginy <= y) &&
       (btn[screen][count].button_beginx + btn[screen][count].button_endx >= x &&
-        btn[screen][count].button_beginy + btn[screen][count].button_endy >= y)) 
+        btn[screen][count].button_beginy + btn[screen][count].button_endy >= y))
     {
       switch (screen) {
       case 0:
@@ -859,56 +838,6 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
       case 2:
         switch (count) {
         case 22:
-          cout<<"crick"<<"2,22"<<endl;
-          vector<int> screen2_errors;
-          bool tr;
-          for(int counter=0;couter < screen2_isbndates.size();counter++){
-            tr=false;
-            for(int i=0;i < isbnrawlist.size();i++){
-              if(screen2_isbndates[counter]==isbnrawlist[i]){
-                tr=true;
-                break;
-              }
-            }
-            if(tr){//found inputisbn in isbnrawlist
-              tr=false;
-              for(int i=0;i < isbnsoldlist.size();i++){
-                if(screen2_isbndates[counter]==isbnsoldlist[i]){
-                  tr=true;
-                  break;
-                }
-              }
-              if(tr){//found in isbnsoldlist(error)
-                screen2_errors.push_back(screen2_isbndates[i]);
-              }else{//not found in isbnsoldlist(true func)
-                ofstream isbnsold("isbnsoldlist.txt",std::ios::app);
-                ifstream isbncoup("isbncouponlist.txt");
-                if(isbnsold.fail() or isbncoup.fail()){
-                  btn[2][30].button_word=u8"ERROR:データファイルの読み込みに失敗しました";
-                  btn[2][30].button_enable=true;
-                  isbncoup.close();
-                  isbnsold.close();
-                  return 0;
-                }else{//load coumplete then gooooooo
-                  isbnsoldlist.push_back(screen2_isbndates[counter]);
-                  isbnsold<<screen2_isbndates[counter]<<endl;
-                  isbnsold.close();
-                  string s;
-                  isbncoup.getline(s,1);
-                  isbncoup.close();
-                  ofstream isbncoupout("isbncouponlist.txt");
-                  int num=atoi(s.c_str());
-                  num+=screen2_coupon;
-                  isbncoupout<<to_string(num)<<endl;
-                  isbncoupout.close();
-                }
-              }
-            }else{//not found
-              screen2_errors.push_back(screen2_isbndates[i]);
-            }
-          }
-          btn[2][30].button_word=u8"売却処理が完了しました";
-          btn[2][30].button_enable=true;
           break;
         case 23:
           if(screen2_scrool_begin != 0)screen2_scrool_begin--;
@@ -929,13 +858,13 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
 
           break;
         case 26:
-          cout << "clicked" <<screen2_coupon<< endl;
+          cout << "coupon: " <<screen2_coupon<< endl;
           screen2_coupon++;
           btn[2][20].button_word = u8"" + to_string(screen2_coupon) + u8"個";
           btn[2][29].button_word = u8"クーポン割引:"+to_string(screen2_coupon*BOOKCOST) + u8"";
           break;
         case 27:
-          cout << "clicked" <<screen2_coupon<< endl;
+          cout << "coupon: " <<screen2_coupon<< endl;
           if (screen2_coupon != 0) {
             screen2_coupon--;
             btn[2][20].button_word = u8"" + to_string(screen2_coupon) + u8"個";
