@@ -3,8 +3,8 @@
 ### 使用ライブラリ
 - openframeworks
 ### ソースファイル以外に必要なもの
-#### 以下は.exeと同じパスに格納。ない場合は自動的に作成されるor無視:
-- isbncouponlist.txt(クーポンが適用されているISBNを格納)
+#### 以下は.exeと同じパスに格納。ない場合はエラーが出まくります:
+- isbncouponlist.txt(いくつクーポンが使われたかを格納)
 - isbnrawlist.txt(すべての本のISBNを格納)
 - isbnsoldlist.txt(売れた本のISBNを格納
 - logo.txt(開始時に表示されるテキストを格納)
