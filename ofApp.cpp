@@ -30,6 +30,7 @@ void ofApp::setup() {
   ifstream rawlist("isbnrawlist.txt");
   if (rawlist.fail()) {
     cout << "ERROR:fail load isbnrawlist.txt" << endl;
+    exit();
   }
   else {
     string rawliststr = "";
@@ -42,10 +43,11 @@ void ofApp::setup() {
   printf("30\%");
   printf("\n");
 
-  /*load isbnrawlist*/
+  /*load isbnsoldlist*/
   ifstream soldlist("isbnsoldlist.txt");
   if (soldlist.fail()) {
     cout << "ERROR:fail load isbnsoldlist.txt" << endl;
+    exit();
   }
   else {
     string soldliststr = "";
@@ -857,9 +859,56 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
       case 2:
         switch (count) {
         case 22:
+          cout<<"crick"<<"2,22"<<endl;
+          vector<int> screen2_errors;
+          bool tr;
           for(int counter=0;couter < screen2_isbndates.size();counter++){
-
+            tr=false;
+            for(int i=0;i < isbnrawlist.size();i++){
+              if(screen2_isbndates[counter]==isbnrawlist[i]){
+                tr=true;
+                break;
+              }
+            }
+            if(tr){//found inputisbn in isbnrawlist
+              tr=false;
+              for(int i=0;i < isbnsoldlist.size();i++){
+                if(screen2_isbndates[counter]==isbnsoldlist[i]){
+                  tr=true;
+                  break;
+                }
+              }
+              if(tr){//found in isbnsoldlist(error)
+                screen2_errors.push_back(screen2_isbndates[i]);
+              }else{//not found in isbnsoldlist(true func)
+                ofstream isbnsold("isbnsoldlist.txt",std::ios::app);
+                ifstream isbncoup("isbncouponlist.txt");
+                if(isbnsold.fail() or isbncoup.fail()){
+                  btn[2][30].button_word=u8"ERROR:データファイルの読み込みに失敗しました";
+                  btn[2][30].button_enable=true;
+                  isbncoup.close();
+                  isbnsold.close();
+                  return 0;
+                }else{//load coumplete then gooooooo
+                  isbnsoldlist.push_back(screen2_isbndates[counter]);
+                  isbnsold<<screen2_isbndates[counter]<<endl;
+                  isbnsold.close();
+                  string s;
+                  isbncoup.getline(s,1);
+                  isbncoup.close();
+                  ofstream isbncoupout("isbncouponlist.txt");
+                  int num=atoi(s.c_str());
+                  num+=screen2_coupon;
+                  isbncoupout<<to_string(num)<<endl;
+                  isbncoupout.close();
+                }
+              }
+            }else{//not found
+              screen2_errors.push_back(screen2_isbndates[i]);
+            }
           }
+          btn[2][30].button_word=u8"売却処理が完了しました";
+          btn[2][30].button_enable=true;
           break;
         case 23:
           if(screen2_scrool_begin != 0)screen2_scrool_begin--;
@@ -893,6 +942,8 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
             btn[2][29].button_word = u8"クーポン割引:"+to_string(screen2_coupon*BOOKCOST) + u8"";
           }
           break;
+        case 30:
+          btn[2][30].button_enable=false;
         }
         break;
       case 3:
