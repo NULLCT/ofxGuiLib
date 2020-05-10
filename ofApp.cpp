@@ -171,7 +171,7 @@ void ofApp::btnsetup() {
   btn[1][3].button_word = u8"何かあったら";
 
   /*screen 2*/
-  btn[2].resize(29);
+  btn[2].resize(31);
 
   btn[2][0].button_beginx = 0 + 25;
   btn[2][0].button_beginy = 0 + 25;
@@ -375,17 +375,17 @@ void ofApp::btnsetup() {
   btn[2][19].button_r = 0xff;
   btn[2][19].button_g = 0xcb;
   btn[2][19].button_b = 0x6f;
-  btn[2][19].button_word = u8"小計:0円";
+  btn[2][19].button_word = u8"小計:0";
   btn[2][19].button_enablesimplebox = true;
 
-  btn[2][20].button_beginx = ofGetWidth()*6 / 8 + 10;
-  btn[2][20].button_beginy = ofGetHeight()*4 / 8 + 10;
-  btn[2][20].button_endx = ofGetWidth()*2 / 8 - 20;
+  btn[2][20].button_beginx = ofGetWidth()*7 / 8 + 10;
+  btn[2][20].button_beginy = ofGetHeight()*1 / 8 + 10;
+  btn[2][20].button_endx = ofGetWidth() / 8 - 20;
   btn[2][20].button_endy = ofGetHeight() / 8 - 20;
   btn[2][20].button_r = 0xff;
   btn[2][20].button_g = 0xcb;
   btn[2][20].button_b = 0x6f;
-  btn[2][20].button_word = u8"クーポン:0個";
+  btn[2][20].button_word = u8"0個";
   btn[2][20].button_enablesimplebox = true;
 
   btn[2][21].button_beginx = ofGetWidth()*6 / 8 + 10;
@@ -395,7 +395,7 @@ void ofApp::btnsetup() {
   btn[2][21].button_r = 255;
   btn[2][21].button_g = 136;
   btn[2][21].button_b = 122;
-  btn[2][21].button_word = u8"合計:0円";
+  btn[2][21].button_word = u8"合計:0";
   btn[2][21].button_enablesimplebox = true;
 
 //----------------↓okbutton---------------------
@@ -444,6 +444,27 @@ void ofApp::btnsetup() {
   btn[2][27].button_endx = ofGetWidth()*1 / 8 - 20;
   btn[2][27].button_endy = ofGetHeight()*1 / 8 - 20;
   btn[2][27].button_word = u8"一枚削除";
+
+  btn[2][28].button_beginx = ofGetWidth()*6 / 8 + 10;
+  btn[2][28].button_beginy = 0 + 10;
+  btn[2][28].button_endx = ofGetWidth() / 8 - 20;
+  btn[2][28].button_endy = ofGetHeight()*3 / 8 - 20;
+  btn[2][28].button_enablesimplebox=true;
+  btn[2][28].button_word = u8"クーポン";
+
+  btn[2][29].button_beginx = ofGetWidth()*6 / 8 + 10;
+  btn[2][29].button_beginy = ofGetHeight()*4 / 8 + 10;
+  btn[2][29].button_endx = ofGetWidth()*2 / 8 - 20;
+  btn[2][29].button_endy = ofGetHeight() / 8 - 20;
+  btn[2][29].button_enablesimplebox=true;
+  btn[2][29].button_word = u8"クーポン割引:0";
+
+  btn[2][30].button_beginx = 0 + 10;
+  btn[2][30].button_beginy = 0 + 10;
+  btn[2][30].button_endx = ofGetWidth()*8 / 8 - 20;
+  btn[2][30].button_endy = ofGetHeight()*8 / 8 - 20;
+  btn[2][30].button_word = u8"ERROR";
+  btn[2][30].enable=false;
 
   /*screen 3*/
   btn[3].resize(1);
@@ -518,10 +539,12 @@ void ofApp::update() {
     btn[2][18].button_word = "";
 
     btn[2][19].button_word = u8"小計:"+
-      to_string(screen2_isbndates.size()*BOOKCOST)+u8"円";
-    btn[2][20].button_word = u8"クーポン:0個";
-    btn[2][21].button_word = u8"総計:0円";
-
+      to_string(screen2_isbndates.size()*BOOKCOST)+u8"";
+    if(screen2_isbndates.size()<screen2_coupon){
+      btn[2][21].button_word = u8"総計:ERROR";
+    }else{
+      btn[2][21].button_word = u8"総計:"+to_string((screen2_isbndates.size()-screen2_coupon)*BOOKCOST);
+    }
     if (screen2_isbndates.size() > screen2_scrool_begin) {
       btn[2][5].button_word = screen2_isbndates[screen2_scrool_begin];
       btn[2][4].button_word = to_string(screen2_scrool_begin + 1);
@@ -833,6 +856,11 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
         break;
       case 2:
         switch (count) {
+        case 22:
+          for(int counter=0;couter < screen2_isbndates.size();counter++){
+
+          }
+          break;
         case 23:
           if(screen2_scrool_begin != 0)screen2_scrool_begin--;
           break;
@@ -854,13 +882,15 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
         case 26:
           cout << "clicked" <<screen2_coupon<< endl;
           screen2_coupon++;
-          btn[2][20].button_word = u8"クーポン:" + to_string(screen2_coupon) + u8"個";
+          btn[2][20].button_word = u8"" + to_string(screen2_coupon) + u8"個";
+          btn[2][29].button_word = u8"クーポン割引:"+to_string(screen2_coupon*BOOKCOST) + u8"";
           break;
         case 27:
           cout << "clicked" <<screen2_coupon<< endl;
           if (screen2_coupon != 0) {
             screen2_coupon--;
-            btn[2][20].button_word = u8"クーポン:" + to_string(screen2_coupon) + u8"個";
+            btn[2][20].button_word = u8"" + to_string(screen2_coupon) + u8"個";
+            btn[2][29].button_word = u8"クーポン割引:"+to_string(screen2_coupon*BOOKCOST) + u8"";
           }
           break;
         }
