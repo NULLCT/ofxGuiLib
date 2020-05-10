@@ -30,7 +30,7 @@ void ofApp::setup() {
   else {
     string rawliststr = "";
     while (getline(rawlist, rawliststr)) {
-      isbnrawlist.push_back(rawliststr);
+      isbnrawlist.push_back(rawliststr.substr(0,int(rawliststr.length())-1));
     }
   }
 
@@ -45,7 +45,7 @@ void ofApp::setup() {
   else {
     string soldliststr = "";
     while (getline(soldlist, soldliststr)) {
-      isbnsoldlist.push_back(soldliststr);
+      isbnsoldlist.push_back(soldliststr.substr(0,int(soldliststr.length())-1));
     }
   }
 
@@ -86,12 +86,12 @@ void ofApp::setup() {
     }
   }
   cout << "ISBNCTRLSYS has started. "
-    << isbnsoldlist.size()
-    << "/"
-    << isbnrawlist.size()
-    << " time: "
-    << time(NULL)
-    << endl;
+       << isbnsoldlist.size()
+       << "/"
+       << isbnrawlist.size()
+       << " time: "
+       << time(NULL)
+       << endl;
 }
 
 //--------------------------------------------------------------
@@ -346,8 +346,8 @@ void ofApp::btnsetup() {
   btn[2][18].button_word = u8"";
   btn[2][18].button_enablesimplebox = true;
 
-//-----------------↑isbnlist----------------------
-//-----------------↓sumlist-----------------------
+  //-----------------↑isbnlist----------------------
+  //-----------------↓sumlist-----------------------
 
   btn[2][19].button_beginx = ofGetWidth()*6 / 8 + 10;
   btn[2][19].button_beginy = ofGetHeight()*3 / 8 + 10;
@@ -379,7 +379,7 @@ void ofApp::btnsetup() {
   btn[2][21].button_word = u8"合計:0";
   btn[2][21].button_enablesimplebox = true;
 
-//----------------↓okbutton---------------------
+  //----------------↓okbutton---------------------
 
   btn[2][22].button_beginx = ofGetWidth()*6 / 8 + 10;
   btn[2][22].button_beginy = ofGetHeight()*6 / 8 + 10;
@@ -460,13 +460,13 @@ void ofApp::btnsetup() {
   for (int scrn = 0; scrn < int(btn.size()); scrn++) {
     for (int count = 0; count < int(btn[scrn].size()); count++) {
       btn[scrn][count].button_fontx =
-        ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) - (font.stringWidth(btn[scrn][count].button_word) / 2);
+          ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) - (font.stringWidth(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_fonty = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
-        (font.stringHeight(btn[scrn][count].button_word) / 2);
+          (font.stringHeight(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_underlinebeginx = ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
-        (font.stringWidth(btn[scrn][count].button_word) / 2);
+          (font.stringWidth(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_underlinebeginy = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
-        (font.stringHeight(btn[scrn][count].button_word) / 2);
+          (font.stringHeight(btn[scrn][count].button_word) / 2);
       btn[scrn][count].button_underlinelenght = font.stringWidth(btn[scrn][count].button_word);
       if (btn[scrn][count].button_enableonlyword) {
         btn[scrn][count].button_enablesimplebox = true;
@@ -482,13 +482,13 @@ void ofApp::update() {
   for (int count = 0; count < int(btn[screen].size()); count++) {
     if (!btn[screen][count].button_enablesimplebox) {
       if ((btn[screen][count].button_beginx <=
-        ofGetMouseX() &&
-        btn[screen][count].button_beginy <=
-        ofGetMouseY()) &&
-        (btn[screen][count].button_beginx + btn[screen][count].button_endx >=
-          ofGetMouseX() &&
-          btn[screen][count].button_beginy + btn[screen][count].button_endy >=
-          ofGetMouseY())) {
+           ofGetMouseX() &&
+           btn[screen][count].button_beginy <=
+           ofGetMouseY()) &&
+          (btn[screen][count].button_beginx + btn[screen][count].button_endx >=
+           ofGetMouseX() &&
+           btn[screen][count].button_beginy + btn[screen][count].button_endy >=
+           ofGetMouseY())) {
         if (btn[screen][count].button_shadowlenght < 10) {
           btn[screen][count].button_shadowlenght += 2;
         }
@@ -520,7 +520,7 @@ void ofApp::update() {
     btn[2][18].button_word = "";
 
     btn[2][19].button_word = u8"小計:"+
-      to_string(screen2_isbndates.size()*BOOKCOST)+u8"";
+        to_string(screen2_isbndates.size()*BOOKCOST)+u8"";
     if(int(screen2_isbndates.size())<screen2_coupon){
       btn[2][21].button_word = u8"総計:ERROR";
     }else{
@@ -556,13 +556,13 @@ void ofApp::update() {
     for (int scrn = 0; scrn < int(btn.size()); scrn++) {
       for (int count = 0; count < int(btn[scrn].size()); count++) {
         btn[scrn][count].button_fontx = ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
-          (font.stringWidth(btn[scrn][count].button_word) / 2);
+            (font.stringWidth(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_fonty = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
-          (font.stringHeight(btn[scrn][count].button_word) / 2);
+            (font.stringHeight(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_underlinebeginx = ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
-          (font.stringWidth(btn[scrn][count].button_word) / 2);
+            (font.stringWidth(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_underlinebeginy = ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
-          (font.stringHeight(btn[scrn][count].button_word) / 2);
+            (font.stringHeight(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_underlinelenght = font.stringWidth(btn[scrn][count].button_word);
         if (btn[scrn][count].button_enableonlyword) {
           btn[scrn][count].button_enablesimplebox = true;
@@ -586,96 +586,96 @@ void ofApp::draw() {
       if (!btn[screen][count].button_enablesimplebox) {
         ofSetColor(0, 0, 0, 100);//shadow
         ofDrawRectangle(
-          btn[screen][count].button_beginx + 5,
-          btn[screen][count].button_beginy + 5,
-          btn[screen][count].button_endx + btn[screen][count].button_shadowlenght,
-          btn[screen][count].button_endy + btn[screen][count].button_shadowlenght
-        );
+              btn[screen][count].button_beginx + 5,
+              btn[screen][count].button_beginy + 5,
+              btn[screen][count].button_endx + btn[screen][count].button_shadowlenght,
+              btn[screen][count].button_endy + btn[screen][count].button_shadowlenght
+              );
         ofSetColor(
-          btn[screen][count].button_r - 10 - btn[screen][count].button_shadowlenght,
-          btn[screen][count].button_g - 10 - btn[screen][count].button_shadowlenght,
-          btn[screen][count].button_b - 10 - btn[screen][count].button_shadowlenght
-        );//button outsidebox
+              btn[screen][count].button_r - 10 - btn[screen][count].button_shadowlenght,
+              btn[screen][count].button_g - 10 - btn[screen][count].button_shadowlenght,
+              btn[screen][count].button_b - 10 - btn[screen][count].button_shadowlenght
+              );//button outsidebox
         ofDrawRectangle(
-          btn[screen][count].button_beginx,
-          btn[screen][count].button_beginy,
-          btn[screen][count].button_endx,
-          btn[screen][count].button_endy
-        );
+              btn[screen][count].button_beginx,
+              btn[screen][count].button_beginy,
+              btn[screen][count].button_endx,
+              btn[screen][count].button_endy
+              );
       }
       if (!btn[screen][count].button_enableonlyword) {
         ofSetColor(
-          btn[screen][count].button_r + btn[screen][count].button_shadowlenght,
-          btn[screen][count].button_g + btn[screen][count].button_shadowlenght,
-          btn[screen][count].button_b + btn[screen][count].button_shadowlenght
-        );//button insidebox
+              btn[screen][count].button_r + btn[screen][count].button_shadowlenght,
+              btn[screen][count].button_g + btn[screen][count].button_shadowlenght,
+              btn[screen][count].button_b + btn[screen][count].button_shadowlenght
+              );//button insidebox
         ofDrawRectangle(btn[screen][count].button_beginx + 10,
-          btn[screen][count].button_beginy + 10,
-          btn[screen][count].button_endx - 20,
-          btn[screen][count].button_endy - 20
-        );
+                        btn[screen][count].button_beginy + 10,
+                        btn[screen][count].button_endx - 20,
+                        btn[screen][count].button_endy - 20
+                        );
       }
 
       ofSetColor(btn[screen][count].button_wordr - 100,
-        btn[screen][count].button_wordg - 100,
-        btn[screen][count].button_wordb - 100
-      );//buttonword shadow 0
+                 btn[screen][count].button_wordg - 100,
+                 btn[screen][count].button_wordb - 100
+                 );//buttonword shadow 0
       font.drawString(btn[screen][count].button_word,
-        btn[screen][count].button_fontx + 2,
-        btn[screen][count].button_fonty + 2
-      );
+                      btn[screen][count].button_fontx + 2,
+                      btn[screen][count].button_fonty + 2
+                      );
 
       ofSetColor(btn[screen][count].button_wordr - 50,
-        btn[screen][count].button_wordg - 50,
-        btn[screen][count].button_wordb - 50
-      );//buttonword shadow 1
+                 btn[screen][count].button_wordg - 50,
+                 btn[screen][count].button_wordb - 50
+                 );//buttonword shadow 1
       font.drawString(btn[screen][count].button_word,
-        btn[screen][count].button_fontx + 1,
-        btn[screen][count].button_fonty + 1
-      );
+                      btn[screen][count].button_fontx + 1,
+                      btn[screen][count].button_fonty + 1
+                      );
 
       ofSetColor(btn[screen][count].button_wordr,
-        btn[screen][count].button_wordg,
-        btn[screen][count].button_wordb
-      );//buttonword
+                 btn[screen][count].button_wordg,
+                 btn[screen][count].button_wordb
+                 );//buttonword
       font.drawString(btn[screen][count].button_word,
-        btn[screen][count].button_fontx,
-        btn[screen][count].button_fonty
-      );
+                      btn[screen][count].button_fontx,
+                      btn[screen][count].button_fonty
+                      );
 
       ofSetColor(255, 255, 255, 200);//buttonword underline
       ofDrawLine(btn[screen][count].button_underlinebeginx,
-        btn[screen][count].button_underlinebeginy + 5,
-        btn[screen][count].button_underlinebeginx + btn[screen][count].button_underlinelenght,
-        btn[screen][count].button_underlinebeginy + 5
-      );
+                 btn[screen][count].button_underlinebeginy + 5,
+                 btn[screen][count].button_underlinebeginx + btn[screen][count].button_underlinelenght,
+                 btn[screen][count].button_underlinebeginy + 5
+                 );
     }
     if (screen == 2) {//draw partation
       ofSetColor(240, 240, 240, 200);
       ofDrawLine(
-        ofGetWidth()*1 / 8,
-        ofGetHeight()*2 / 8,
-        ofGetWidth()*1 / 8,
-        ofGetHeight()*8 / 8-10
-      );
+            ofGetWidth()*1 / 8,
+            ofGetHeight()*2 / 8,
+            ofGetWidth()*1 / 8,
+            ofGetHeight()*8 / 8-10
+            );
       ofDrawLine(
-        ofGetWidth()*4 / 8,
-        ofGetHeight()*2 / 8,
-        ofGetWidth()*4 / 8,
-        ofGetHeight()*8 / 8-10
-      );
+            ofGetWidth()*4 / 8,
+            ofGetHeight()*2 / 8,
+            ofGetWidth()*4 / 8,
+            ofGetHeight()*8 / 8-10
+            );
       ofDrawLine(
-        ofGetWidth()*5 / 8,
-        ofGetHeight()*2 / 8,
-        ofGetWidth()*5 / 8,
-        ofGetHeight()*8 / 8-10
-      );
+            ofGetWidth()*5 / 8,
+            ofGetHeight()*2 / 8,
+            ofGetWidth()*5 / 8,
+            ofGetHeight()*8 / 8-10
+            );
       ofDrawLine(
-        0,
-        ofGetHeight()*2 / 8,
-        0,
-        ofGetHeight()*6 / 8
-      );
+            0,
+            ofGetHeight()*2 / 8,
+            0,
+            ofGetHeight()*6 / 8
+            );
     }
   }
 
@@ -765,21 +765,21 @@ void ofApp::keyPressed(int key){
     for (int scrn = 0; scrn < int(btn.size()); scrn++) {
       for (int count = 0; count < int(btn[scrn].size()); count++) {
         btn[scrn][count].button_fontx =
-          ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
-          (font.stringWidth(btn[scrn][count].button_word) / 2);
+            ((btn[scrn][count].button_beginx * 2 + btn[scrn][count].button_endx) / 2) -
+            (font.stringWidth(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_fonty =
-          ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
-          (font.stringHeight(btn[scrn][count].button_word) / 2);
+            ((btn[scrn][count].button_beginy * 2 + btn[scrn][count].button_endy) / 2) +
+            (font.stringHeight(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_underlinebeginx =
-          ((btn[scrn][count].button_beginx * 2 +
-          btn[scrn][count].button_endx) / 2) -
-          (font.stringWidth(btn[scrn][count].button_word) / 2);
+            ((btn[scrn][count].button_beginx * 2 +
+              btn[scrn][count].button_endx) / 2) -
+            (font.stringWidth(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_underlinebeginy =
-          ((btn[scrn][count].button_beginy * 2 +
-          btn[scrn][count].button_endy) / 2) +
-          (font.stringHeight(btn[scrn][count].button_word) / 2);
+            ((btn[scrn][count].button_beginy * 2 +
+              btn[scrn][count].button_endy) / 2) +
+            (font.stringHeight(btn[scrn][count].button_word) / 2);
         btn[scrn][count].button_underlinelenght =
-          font.stringWidth(btn[scrn][count].button_word);
+            font.stringWidth(btn[scrn][count].button_word);
         if (btn[scrn][count].button_enableonlyword) {
           btn[scrn][count].button_enablesimplebox = true;
         }
@@ -805,9 +805,9 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
 
   for (int count = 0; count < int(btn[screen].size()); count++){
     if ((btn[screen][count].button_beginx <= x &&
-      btn[screen][count].button_beginy <= y) &&
-      (btn[screen][count].button_beginx + btn[screen][count].button_endx >= x &&
-        btn[screen][count].button_beginy + btn[screen][count].button_endy >= y))
+         btn[screen][count].button_beginy <= y) &&
+        (btn[screen][count].button_beginx + btn[screen][count].button_endx >= x &&
+         btn[screen][count].button_beginy + btn[screen][count].button_endy >= y))
     {
       switch (screen) {
       case 0:
@@ -838,12 +838,45 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
       case 2:
         switch (count) {
         case 22:
+        {
+            cout<<"pushed \"KAKUTEI\""<<endl;
+            bool tr=false;
+            /*search in isbnrawlist*/
+            for(int counter_0=0;counter_0<int(screen2_isbndates.size());counter_0++){
+                tr=false;
+                for(int counter_1=0;counter_1<int(isbnrawlist.size());counter_1++){
+                    if(screen2_isbndates[counter_0]==isbnrawlist[counter_1]){
+                        tr=true;
+                    }
+                }
+                if(tr){//found num in isbnrawlist
+                    /*search in inbnsoldlist*/
+                    tr=false;
+                    for(int counter_1=0;counter_1<int(isbnsoldlist.size());counter_1++){
+                        if(screen2_isbndates[counter_0]==isbnsoldlist[counter_1]){
+                            tr=true;
+                        }
+                    }
+                    if(tr){//found num in isbnsoldlist(error)
+                      cout<<"found num in isbnsoldlist(error)"<<endl;
+                    }else{//not found(true)
+                      cout<<"not found(true)"<<endl;
+                    }
+                }else{//not found(error)
+                  cout<<"not found(error)"<<endl;
+                }
+            }
+        }
           break;
         case 23:
-          if(screen2_scrool_begin != 0)screen2_scrool_begin--;
+          if(screen2_scrool_begin != 0){
+              screen2_scrool_begin--;
+          }
           break;
         case 24:
-          if(screen2_scrool_begin < screen2_isbndates.size()-5)screen2_scrool_begin++;
+          if(screen2_scrool_begin < int(screen2_isbndates.size())-5){
+              screen2_scrool_begin++;
+          }
           break;
         case 25:
           screen2_scrool_begin = 0;
