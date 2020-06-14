@@ -882,63 +882,74 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
                 }
               }
             }
+
             if (!noerror) {
               cout << "Erororororor:" << screen2_switcherror << endl;
+              btn[2][30].button_word = "Errors:\n";
               switch (screen2_switcherror) {
               case 0:
-                btn[2][30].button_word = u8"なんかよく分からんエラーです";
+                btn[2][30].button_word += u8"  ・なんかよく分からんエラー\n";
                 break;
               case 1:
-                btn[2][30].button_word = u8"クーポン多すぎ";
+                btn[2][30].button_word += u8"  ・クーポン多すぎ\n";
                 break;
               case 2:
-                btn[2][30].button_word = u8"元データに本が存在しません\n推奨:これどうしようもないんで\n紙にでも書いといてください";
+                btn[2][30].button_word += u8"  ・元データに本がない\n";
                 break;
               case 3:
-                btn[2][30].button_word = u8"もうこの本は売れてるはずです\n推測:二回スキャンした";
+                btn[2][30].button_word += u8"  ・もうこの本は売れてる\n";
                 break;
               }
               btn[2][30].button_enable=true;
-              cout << "changed" << endl;
-            }
-            bool tr=false;
-            /*search in isbnrawlist*/
-            for(int counter_0=0;counter_0<int(screen2_isbndates.size());counter_0++){
-                tr=false;
-                for(int counter_1=0;counter_1<int(isbnrawlist.size());counter_1++){
-                    if(screen2_isbndates[counter_0]==isbnrawlist[counter_1]){
-                        tr=true;
-                    }
+              break;
+
+            }else {
+
+              bool tr = false;
+              /*search in isbnrawlist*/
+              for (int counter_0 = 0; counter_0<int(screen2_isbndates.size()); counter_0++) {
+                tr = false;
+                for (int counter_1 = 0; counter_1<int(isbnrawlist.size()); counter_1++) {
+                  if (screen2_isbndates[counter_0] == isbnrawlist[counter_1]) {
+                    tr = true;
+                  }
                 }
-                if(tr){//found num in isbnrawlist
+                if (tr) {//found num in isbnrawlist
                     /*search in inbnsoldlist*/
-                    tr=false;
-                    for(int counter_1=0;counter_1<int(isbnsoldlist.size());counter_1++){
-                        if(screen2_isbndates[counter_0]==isbnsoldlist[counter_1]){
-                            tr=true;
-                        }
+                  tr = false;
+                  for (int counter_1 = 0; counter_1<int(isbnsoldlist.size()); counter_1++) {
+                    if (screen2_isbndates[counter_0] == isbnsoldlist[counter_1]) {
+                      tr = true;
                     }
-                    if(tr){//found num in isbnsoldlist(error)
-                      cout<<"found num in isbnsoldlist(error)"<<endl;
-                    }else{//not found(true)
-                      cout<<"found"<<endl;
-                      //write to isbnsoldlist
-                      ofstream ofs_sold("isbnsoldlist.txt",std::ios::app);
-                      ofs_sold << screen2_isbndates[counter_0] << endl;
-                      ofs_sold.close();
-                      isbnsoldlist.push_back(screen2_isbndates[counter_0]);
-                    }
-                }else{//not found(error)
-                  cout<<"not found"<<endl;
+                  }
+                  if (tr) {//found num in isbnsoldlist(error)
+                    cout << "found num in isbnsoldlist(error)" << endl;
+                  }
+                  else {//not found(true)
+                    cout << "found" << endl;
+                    //write to isbnsoldlist
+                    ofstream ofs_sold("isbnsoldlist.txt", std::ios::app);
+                    ofs_sold << screen2_isbndates[counter_0] << endl;
+                    ofs_sold.close();
+                    isbnsoldlist.push_back(screen2_isbndates[counter_0]);
+                  }
                 }
+                else {//not found(error)
+                  cout << "not found" << endl;
+                }
+              }
+
+              ifstream ifs("isbncouponlist.txt");
+              string str = "";
+              getline(ifs, str);
+              ifs.close();
+              ofstream ofs_coup("isbncouponlist.txt", std::ios::trunc);
+              ofs_coup << ofToString(atoi(str.c_str()) + screen2_coupon) << endl;
+              ofs_coup.close();
+
+              btn[2][30].button_word = u8"売却終了";
+              btn[2][30].button_enable=true;
             }
-            ifstream ifs("isbncouponlist.txt");
-            string str = "";
-            getline(ifs, str);
-            ifs.close();
-            ofstream ofs_coup("isbncouponlist.txt", std::ios::trunc);
-            ofs_coup << ofToString(atoi(str.c_str()) + screen2_coupon) << endl;
-            ofs_coup.close();
         }
           break;
         case 23:

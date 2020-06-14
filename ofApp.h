@@ -46,11 +46,11 @@ public:
   int piyohikoy = 0;//piyohiko ypos
   string inputisbn = "";//input isbn
 
+  string screen2_saveerrortext = "";
   int screen2_scrool_begin = 0;//screen2 scrool place
   int screen2_coupon = 0;//count coupon
   int screen2_switcherror = 0;
   int screen2_counterrorbutton = 0;//60 to desapier
-  string screen2_saveerrortext = "";
   /*
     0: OK
     1: 総額よりクーポン減額分のほうが多いです
