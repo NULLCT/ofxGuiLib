@@ -49,13 +49,12 @@ public:
   string screen2_saveerrortext = "";
   int screen2_scrool_begin = 0;//screen2 scrool place
   int screen2_coupon = 0;//count coupon
-  int screen2_switcherror = 0;
   int screen2_counterrorbutton = 0;//60 to desapier
+  vector<bool> screen2_switcherror;
   /*
-    0: OK
-    1: 総額よりクーポン減額分のほうが多いです
-    2: isbnrawlistの中に入力した物がありませんでした
-    3: isbnsoldlistの中に入力した物がありました
+    0: 総額よりクーポン減額分のほうが多いです
+    1: isbnrawlistの中に入力した物がありませんでした
+    2: isbnsoldlistの中に入力した物がありました
   */
   vector<string> screen2_isbndates;//books list in screen2 has{string(isbn),int(sum)}
 };

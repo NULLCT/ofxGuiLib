@@ -56,7 +56,7 @@ void ofApp::setup() {
   /*of setting*/
   ofSetBackgroundColor(222, 222, 222);
   ofSetFrameRate(60);
-  ofSetWindowTitle("ISBNCTRLSYSv0.0");
+  ofSetWindowTitle("ISBNCTRLSYS_1.0");
   ofSetLineWidth(5);
   ofSetEscapeQuitsApp(false);
 
@@ -108,7 +108,8 @@ void ofApp::btnsetup() {
     "hogehoge" will be changed.
     that's why.
   */
-  screen2_switcherror = 0;
+
+  screen2_switcherror.resize(3, false);
 
   /*screen size*/
   btn.resize(7);
@@ -541,10 +542,8 @@ void ofApp::update() {
         to_string(screen2_isbndates.size()*BOOKCOST)+u8"";
     if(int(screen2_isbndates.size())<screen2_coupon){
       btn[2][21].button_word = u8"総計:ERROR";
-      screen2_switcherror = 1;
     }else{
       btn[2][21].button_word = u8"総計:"+to_string((screen2_isbndates.size()-screen2_coupon)*BOOKCOST);
-      screen2_switcherror = 0;
     }
     if (int(screen2_isbndates.size()) > screen2_scrool_begin) {
       btn[2][5].button_word = screen2_isbndates[screen2_scrool_begin];
@@ -860,8 +859,9 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
         case 22:
         {
             cout<<"pushed \"KAKUTEI\""<<endl;
-            bool noerror = false;
+            screen2_switcherror.resize(3, false);
             {
+              bool noerror = false;
               for (int counter_0 = 0; counter_0<int(screen2_isbndates.size()); counter_0++) {
                 for (int counter_1 = 0; counter_1<int(isbnrawlist.size()); counter_1++) {
                   if (screen2_isbndates[counter_0] == isbnrawlist[counter_1]) {
@@ -872,38 +872,42 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
                     /*search in inbnsoldlist*/
                   for (int counter_1 = 0; counter_1<int(isbnsoldlist.size()); counter_1++) {
                     if (screen2_isbndates[counter_0] == isbnsoldlist[counter_1]) {
-                      noerror = false;
-                      screen2_switcherror = 3;
+                      screen2_switcherror[2] = true;
                     }
                   }
                 }
                 else {
-                  screen2_switcherror = 2;
+                  noerror = false;
+                  screen2_switcherror[1] = true;
                 }
               }
             }
 
-            if (!noerror) {
-              cout << "Erororororor:" << screen2_switcherror << endl;
+            if (screen2_isbndates.size() < screen2_coupon) {
+              screen2_switcherror[0] = true;
+            }
+
+            if (screen2_switcherror[0] or screen2_switcherror[1] or screen2_switcherror[2]) {
+              cout << "Erororororor:" << endl;
               btn[2][30].button_word = "Errors:\n";
-              switch (screen2_switcherror) {
-              case 0:
-                btn[2][30].button_word += u8"  ・なんかよく分からんエラー\n";
-                break;
-              case 1:
+
+              if (screen2_switcherror[0]) {
                 btn[2][30].button_word += u8"  ・クーポン多すぎ\n";
-                break;
-              case 2:
-                btn[2][30].button_word += u8"  ・元データに本がない\n";
-                break;
-              case 3:
-                btn[2][30].button_word += u8"  ・もうこの本は売れてる\n";
-                break;
               }
+              if (screen2_switcherror[1]) {
+                btn[2][30].button_word += u8"  ・元データに本がない\n";
+              }
+              if (screen2_switcherror[2]) {
+                btn[2][30].button_word += u8"  ・もうこの本は売れてる\n";
+              }
+
               btn[2][30].button_enable=true;
+              screen2_isbndates.clear();
+              screen2_coupon = 0;
+              screen2_scrool_begin = 0;
               break;
 
-            }else {
+            } else {
 
               bool tr = false;
               /*search in isbnrawlist*/
@@ -951,6 +955,9 @@ void ofApp::mousePressed(int x, int y, int button){//ボタン依存の機能は
               btn[2][30].button_enable=true;
             }
         }
+        screen2_isbndates.clear();
+        screen2_coupon = 0;
+        screen2_scrool_begin = 0;
           break;
         case 23:
           if(screen2_scrool_begin != 0){
