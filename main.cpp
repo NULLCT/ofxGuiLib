@@ -1,8 +1,8 @@
-﻿#include "ofMain.h"
-#include "ofApp.h"
+﻿#include "ofApp.h"
+#include "ofMain.h"
 int main() {
   cout << "begin openframeworks" << endl;
-  ofSetupOpenGL(1280, 720, OF_WINDOW);//OF_FULLSCREENは使わない
+  ofSetupOpenGL(1280, 720, OF_WINDOW);  // OF_FULLSCREENは使わない
   ofRunApp(new ofApp());
   cout << "ISBNCTRLSYS has been exited" << endl;
   return 0;
@@ -18,7 +18,7 @@ int main() {
     - すべての本のISBNを行ごとに記録したファイル...isbnrawlist.txt(読み書き)
     - 売却した本のISBNを行ごとに記録したファイル...isbnsoldlist.txt(読み書き)
     - 売却した本の中でも、クーポンを適用した本のISBNを行ごとに記録したファイル...isbncouponlist.txt(読み書き)
-    
+
     これらをすべてまとめた物を...result.csv
     - 一行目: 本のISBN
     - 二行目: その本が売れているかどうかをTrue/Falseで記す
