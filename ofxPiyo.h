@@ -1,16 +1,17 @@
 #pragma once
 
-#include "ofMain.h"
 #include <time.h>
+
 #include <random>
 
+#include "ofMain.h"
 
 class Piyo {
-public:
+ public:
   Piyo();
   void run();
 
-private:
+ private:
   ofImage piyoimage;
   int x, y, w, h;
   int replaceframe = 60 * 10;

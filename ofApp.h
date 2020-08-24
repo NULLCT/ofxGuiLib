@@ -5,11 +5,11 @@
 /*
 TODO:
   ofApp.h:30:
-    ‘‚«o‚µ‚Ìcsv‚É‚Â‚¢‚ÄéŒ¾‚·‚é‚©‚Ç‚¤‚©
+    ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½csvï¿½É‚Â‚ï¿½ï¿½ÄéŒ¾ï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½
 
 */
 class ofApp : public ofBaseApp {
-public:
+ public:
   void setup();
   void update();
   void draw();
@@ -25,20 +25,20 @@ public:
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
-private:
+ private:
   /*Date*/
-  vector<string> isbnraw; // List of isbn numbers in shop (isbnraw.txt)
-  vector<string> isbnsold; // List of sold book's isbn (isbnsold.txt)
-  vector<string> isbnsoldtime; // List of the time when the book was sold (isbnsoldtime.txt)
-  long isbncoupon; // Count how many coupon used (isbncoupon.txt)
+  vector<string> isbnraw;       // List of isbn numbers in shop (isbnraw.txt)
+  vector<string> isbnsold;      // List of sold book's isbn (isbnsold.txt)
+  vector<string> isbnsoldtime;  // List of the time when the book was sold
+                                // (isbnsoldtime.txt)
+  long isbncoupon;              // Count how many coupon used (isbncoupon.txt)
 
   /*Font*/
-  ofTrueTypeFont buttonfont; // Font for ofxButton
-  
+  ofTrueTypeFont buttonfont;  // Font for ofxButton
+
   /*Buttons*/
-  ofxButton welcome; // "d–‚ğ‚Í‚¶‚ß‚é"
+  ofxButton welcome;  // "ï¿½dï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ß‚ï¿½"
 
   /*Piyo*/
   Piyo piyo;
-
 };
