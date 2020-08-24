@@ -4,8 +4,6 @@
 #include "ofxPiyo.h"
 /*
 TODO:
-  ofApp.h:30:
-    �����o����csv�ɂ��Đ錾���邩�ǂ���
 
 */
 class ofApp : public ofBaseApp {
@@ -37,7 +35,7 @@ class ofApp : public ofBaseApp {
   ofTrueTypeFont buttonfont;  // Font for ofxButton
 
   /*Buttons*/
-  ofxButton welcome;  // "�d�����͂��߂�"
+  ofxButton welcome;  // "お仕事をはじめる" button
 
   /*Piyo*/
   Piyo piyo;
