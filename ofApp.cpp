@@ -2,6 +2,29 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+  using namespace std;
+  /*Load files*/
+  //Put logo
+  {
+    ofBuffer buf = ofBufferFromFile("logo.txt");
+    for (auto line : buf.getLines()) { cout << line << "\n"; }
+  }
+
+  //isbnraw
+  {
+    ofBuffer buf = ofBufferFromFile("isbnraw.txt");
+    for (auto line : buf.getLines()) { isbnraw.push_back(line); }
+  }
+  //isbnsold
+  {
+    ofBuffer buf = ofBufferFromFile("isbnsold.txt");
+    for (auto line : buf.getLines()) { isbnsold.push_back(line); }
+  }
+  //isbnsoldtime
+  {
+    ofBuffer buf = ofBufferFromFile("isbnsoldtime.txt");
+    for (auto line : buf.getLines()) { isbnsoldtime.push_back(line); }
+  }
 
 }
 

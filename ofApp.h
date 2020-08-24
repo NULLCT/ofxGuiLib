@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxButton.h"
+#include "ofxPiyo.h"
 /*
 TODO:
   ofApp.h:30:
@@ -25,15 +26,18 @@ public:
   void gotMessage(ofMessage msg);
 
 private:
-  /*Dates*/
-  ofFile isbnraw; // List of isbn numbers in shop (isbnraw.txt)
-  ofFile isbnsold; // List of sold book's isbn (isbnsold.txt)
-  ofFile isbnsoldtime; // List of the time when the book was sold (isbnsoldtime.txt)
-  ofFile isbncoupon; // Count how many coupon used (isbncoupon.txt)
+  /*Date*/
+  vector<string> isbnraw; // List of isbn numbers in shop (isbnraw.txt)
+  vector<string> isbnsold; // List of sold book's isbn (isbnsold.txt)
+  vector<string> isbnsoldtime; // List of the time when the book was sold (isbnsoldtime.txt)
+  long isbncoupon; // Count how many coupon used (isbncoupon.txt)
 
+  /*Font*/
   ofTrueTypeFont buttonfont; // Font for ofxButton
   
-  /*Begin Screen*/
+  /*Buttons*/
   ofxButton welcome; // "ŽdŽ–‚ð‚Í‚¶‚ß‚é"
+
+  /*Piyo*/
 
 };
