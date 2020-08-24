@@ -39,5 +39,6 @@ private:
   ofxButton welcome; // "ŽdŽ–‚ð‚Í‚¶‚ß‚é"
 
   /*Piyo*/
+  Piyo piyo;
 
 };

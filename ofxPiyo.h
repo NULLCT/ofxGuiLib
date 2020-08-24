@@ -4,6 +4,7 @@
 #include <time.h>
 #include <random>
 
+
 class Piyo {
 public:
   Piyo();
@@ -12,4 +13,5 @@ public:
 private:
   ofImage piyoimage;
   int x, y, w, h;
+  int replaceframe = 60 * 10;
 };

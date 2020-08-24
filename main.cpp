@@ -1,12 +1,13 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
-//========================================================================
 int main() {
-  ofSetupOpenGL(1024, 768, OF_WINDOW);			// <-------- setup the GL context
+  ofGLFWWindowSettings settings; // OpenFrameWorks setting
 
-  // this kicks off the running of my app
-  // can be OF_WINDOW or OF_FULLSCREEN
-  // pass in width and height too:
-  ofRunApp(new ofApp());
+  settings.title = "ISBNCTRLSYS v0.1a"; // Title
+  settings.setSize(1200, 600); // Size
+  settings.resizable = false; // non resiable
+
+  ofCreateWindow(settings); // attach settings
+  return ofRunApp(new ofApp); // create ofApp
 }

@@ -3,13 +3,13 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
   using namespace std;
+
   /*Load files*/
   //Put logo
   {
     ofBuffer buf = ofBufferFromFile("logo.txt");
     for (auto line : buf.getLines()) { cout << line << "\n"; }
   }
-
   //isbnraw
   {
     ofBuffer buf = ofBufferFromFile("isbnraw.txt");
@@ -25,6 +25,19 @@ void ofApp::setup() {
     ofBuffer buf = ofBufferFromFile("isbnsoldtime.txt");
     for (auto line : buf.getLines()) { isbnsoldtime.push_back(line); }
   }
+  //isbncoupon
+  {
+    ofBuffer buf = ofBufferFromFile("isbncoupon.txt");
+    for (auto line : buf.getLines()) {
+      isbncoupon = stoi(line);
+      break;
+      //TODO: What the heck this code. I cant use iterator
+    }
+  }
+
+  /*Font*/
+  cout << "Load font\n";
+  buttonfont.load("Cica.ttf",32);
 
 }
 
@@ -35,7 +48,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-
+  piyo.run();
 }
 
 //--------------------------------------------------------------

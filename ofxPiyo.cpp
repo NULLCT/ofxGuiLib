@@ -10,7 +10,7 @@ Piyo::Piyo() {
 }
 
 void Piyo::run() {
-  if (ofGetFrameNum() % 60*10 == 0) {
+  if (ofGetFrameNum() % replaceframe == 0) {
     x = rand() % ofGetWidth();
     y = rand() % ofGetHeight();
     w = rand() % 75;
