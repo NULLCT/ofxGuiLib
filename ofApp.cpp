@@ -72,7 +72,7 @@ void ofApp::setup() {
   }
 
   /*button vars set*/
-  buttonset();
+  buttonSet();
 }
 
 
@@ -89,13 +89,14 @@ void ofApp::draw() {
   }
   if (screen == 1) { // Sold page
     ofBackground(ofColor(0, 0, 0));
-    showisbnlist();
+    showISBNList();
 
   }
 
-  showunixtime(font16);
+  showUnixTime(font16);
+
 #ifdef DEBUG_SHOWMOUSEPOS
-    showmousepos(font16);
+  showMousePos(font16);
 #endif
 }
 
@@ -113,7 +114,8 @@ void ofApp::keyPressed(int key) {
   if (key == '9') { isbninputbuf += "9"; }
 
   if (key == ofKey::OF_KEY_RETURN) {
-    
+    isbnlist.push_back(isbninputbuf); // add to isbnlist
+    isbninputbuf = "";                // clear isbninputbuf
   }
 }
 
@@ -150,7 +152,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {}
 /*Made by myself functions*/
 
 //--------------------------------------------------------------
-void ofApp::buttonset() {
+void ofApp::buttonSet() {
   //Screen 0
   welcome.set(ofGetWidth()/2-200, ofGetHeight()/2-100, 400, 200, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"‚¨ŽdŽ–‚ð‚Í‚¶‚ß‚é");
 
@@ -163,7 +165,7 @@ void ofApp::buttonset() {
 }
 
 //--------------------------------------------------------------
-void ofApp::showisbnlist() {
+void ofApp::showISBNList() {
   ofSetColor(255, 255, 255, 100);
   for (int i = 1; i < isbnshowlist.size(); i++) { // show patation
     ofDrawLine(40, 32 + i * 100, 610, 32 + i * 100);
@@ -181,16 +183,20 @@ void ofApp::showisbnlist() {
 }
 
 //--------------------------------------------------------------
-void ofApp::showunixtime(ofTrueTypeFont& _font) {
+void ofApp::showUnixTime(ofTrueTypeFont& _font) {
   ofSetColor(255, 255, 255, 100);
   _font.drawString("UnixTime: "+to_string(time(NULL)), 0, 15);
 }
 
 //--------------------------------------------------------------
-void ofApp::showmousepos(ofTrueTypeFont& _font) {
+void ofApp::showMousePos(ofTrueTypeFont& _font) {
   ofSetColor(255, 255, 255, 100);
   ofDrawLine(0, ofGetMouseY(), ofGetWidth(), ofGetMouseY());// x // line
   ofDrawLine(ofGetMouseX(), 0, ofGetMouseX(), ofGetHeight());// y // line
 
   _font.drawString(to_string(ofGetMouseX()) + ":" + to_string(ofGetMouseY()), 0, ofGetHeight());
+}
+
+void ofApp::updateISBNShowList() {
+
 }

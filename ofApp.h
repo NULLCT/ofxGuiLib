@@ -24,10 +24,11 @@ class ofApp : public ofBaseApp {
   void gotMessage(ofMessage msg);
 
   /*Made by myself functions*/
-  void buttonset();
-  void showisbnlist();
-  void showunixtime(ofTrueTypeFont& _font);
-  void showmousepos(ofTrueTypeFont& _font);
+  void buttonSet();
+  void showISBNList();
+  void showUnixTime(ofTrueTypeFont& _font);
+  void showMousePos(ofTrueTypeFont& _font);
+  void updateISBNShowList();
 
 
  private:
