@@ -9,6 +9,7 @@ TODO:
 class ofApp : public ofBaseApp {
  public:
   void setup();
+  void buttonset();
   void update();
   void draw();
   void keyPressed(int key);
@@ -24,19 +25,19 @@ class ofApp : public ofBaseApp {
   void gotMessage(ofMessage msg);
 
  private:
-  /*Date*/
+  /*ISBN Date*/
   vector<string> isbnraw;       // List of isbn numbers in shop (isbnraw.txt)
   vector<string> isbnsold;      // List of sold book's isbn (isbnsold.txt)
   vector<string> isbnsoldtime;  // List of the time when the book was sold
                                 // (isbnsoldtime.txt)
-  long isbncoupon;              // Count how many coupon used (isbncoupon.txt)
+  int isbncoupon;              // Count how many coupon used (isbncoupon.txt)
 
   /*Font*/
   ofTrueTypeFont buttonfont;  // Font for ofxButton
 
-  /*Buttons*/
-  ofxButton welcome;  // "お仕事をはじめる" button
-
   /*Piyo*/
   Piyo piyo;
+
+  /*Buttons*/
+  ofxButton welcome;  // "お仕事をはじめる" button
 };
