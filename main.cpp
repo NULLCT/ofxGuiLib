@@ -9,5 +9,5 @@ int main() {
   settings.resizable = false;            // non resiable
 
   ofCreateWindow(settings);    // attach settings
-  return ofRunApp(new ofApp);  // create ofApp
+  return ofRunApp(new ofApp());  // create ofApp
 }

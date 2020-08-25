@@ -91,10 +91,9 @@ void ofApp::draw() {
     ofBackground(ofColor(0, 0, 0));
     showISBNList(font32jp);
     
-    if (allremove.run()) {
-      removeISBNShowList();
-      cout << isbnshowlist[0].text << "\n";
-    }
+    if (allremove.run()) { removeISBNShowList(); }
+
+    //coupon.draw();
   }
 
   showUnixTime(font16);
@@ -171,7 +170,9 @@ void ofApp::buttonSet() {
     isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(145, 145, 145), ofColor(0, 0, 0), font16, "");
   }
 
-  allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"‘S\ní\nœ\n\n");
+  allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"‘S\ní\nœ");
+
+  //coupon.set(800, 50, 100, 50, ofColor(230, 20, 20), font16);
 
 }
 
@@ -233,12 +234,11 @@ void ofApp::updateISBNShowList() {
 
 void ofApp::removeISBNShowList() {
   isbnlist.clear();
-  for (auto i : isbnshowlist) {
-    i.text.clear();
-  }
-  for (auto i : isbnshowlistatpos) {
-    i.text.clear();
-  }
-  isbnshowliststartpos = 0;
+  isbnshowlist.clear();
+  isbnshowlistatpos.clear();
+  
   isbninputbuf.clear();
+  isbnshowliststartpos = 0;
+
+  buttonSet(); // TODO: is it true way? it can work but I dont like
 }

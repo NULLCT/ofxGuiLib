@@ -64,4 +64,6 @@ class ofApp : public ofBaseApp {
 
   ofxButton allremove;
 
+  //ofxNumSetter coupon;
+
 };
