@@ -9,7 +9,6 @@ TODO:
 class ofApp : public ofBaseApp {
  public:
   void setup();
-  void buttonset();
   void update();
   void draw();
   void keyPressed(int key);
@@ -24,20 +23,39 @@ class ofApp : public ofBaseApp {
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
+  /*Made by myself functions*/
+  void buttonset();
+  void showisbnlist();
+  void showunixtime(ofTrueTypeFont& _font);
+  void showmousepos(ofTrueTypeFont& _font);
+
+
  private:
+  /*Screen control*/
+  int screen = 0;//0=>welcome page, 1=>sold page
+
   /*ISBN Date*/
   vector<string> isbnraw;       // List of isbn numbers in shop (isbnraw.txt)
   vector<string> isbnsold;      // List of sold book's isbn (isbnsold.txt)
   vector<string> isbnsoldtime;  // List of the time when the book was sold
                                 // (isbnsoldtime.txt)
-  int isbncoupon;              // Count how many coupon used (isbncoupon.txt)
+  int isbncoupon=0;              // Count how many coupon used (isbncoupon.txt)
+
+  /*ISBN input system*/
+  string isbninputbuf=""; // type num will in this
+  vector<string> isbnlist; // isbninputbuf will in this when type return(enter)
 
   /*Font*/
-  ofTrueTypeFont buttonfont;  // Font for ofxButton
+  ofTrueTypeFont font32jp;  // Font for ofxButton
+  ofTrueTypeFont font16; // Font for ofApp::showunixtime()
 
   /*Piyo*/
   Piyo piyo;
 
   /*Buttons*/
+  //screen: 0
   ofxButton welcome;  // "お仕事をはじめる" button
+  //screen: 1
+  vector<ofxButton> isbnshowlist; // is 5 best?
+
 };
