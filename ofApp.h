@@ -25,7 +25,7 @@ class ofApp : public ofBaseApp {
 
   /*Made by myself functions*/
   void buttonSet();
-  void showISBNList();
+  void showISBNList(ofTrueTypeFont& _font);
   void showUnixTime(ofTrueTypeFont& _font);
   void showMousePos(ofTrueTypeFont& _font);
   void updateISBNShowList();
@@ -58,5 +58,7 @@ class ofApp : public ofBaseApp {
   ofxButton welcome;  // "お仕事をはじめる" button
   //screen: 1
   vector<ofxButton> isbnshowlist; // is 5 best?
+  vector<ofxButton> isbnshowlistatpos; // is 5 best?
+  int isbnshowliststartpos = 0;
 
 };

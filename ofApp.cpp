@@ -89,7 +89,7 @@ void ofApp::draw() {
   }
   if (screen == 1) { // Sold page
     ofBackground(ofColor(0, 0, 0));
-    showISBNList();
+    showISBNList(font32jp);
 
   }
 
@@ -114,8 +114,11 @@ void ofApp::keyPressed(int key) {
   if (key == '9') { isbninputbuf += "9"; }
 
   if (key == ofKey::OF_KEY_RETURN) {
-    isbnlist.push_back(isbninputbuf); // add to isbnlist
-    isbninputbuf = "";                // clear isbninputbuf
+    if (isbninputbuf != "") { // if isbninputbuf is not empty
+      isbnlist.push_back(isbninputbuf); // add to isbnlist
+      isbninputbuf = "";                // clear isbninputbuf
+      updateISBNShowList();             // update isbn show list
+    }
   }
 }
 
@@ -158,14 +161,16 @@ void ofApp::buttonSet() {
 
   //Screen 1
   isbnshowlist.resize(5);
+  isbnshowlistatpos.resize(5);
   for (int i = 0; i < isbnshowlist.size();i++) {
-    isbnshowlist[i].set(50, 50 + i * 100, 550, 64, ofColor(145, 145, 145), ofColor(0, 0, 0), font16, "");
+    isbnshowlist[i].set(100, 50 + i * 100, 500, 64, ofColor(245, 245, 245), ofColor(0, 0, 0), font16, "");
+    isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(145, 145, 145), ofColor(0, 0, 0), font16, "");
   }
 
 }
 
 //--------------------------------------------------------------
-void ofApp::showISBNList() {
+void ofApp::showISBNList(ofTrueTypeFont& _font) {
   ofSetColor(255, 255, 255, 100);
   for (int i = 1; i < isbnshowlist.size(); i++) { // show patation
     ofDrawLine(40, 32 + i * 100, 610, 32 + i * 100);
@@ -175,10 +180,15 @@ void ofApp::showISBNList() {
     i.run(); 
   }
 
+  for (auto i : isbnshowlistatpos) { // show isbnlistatpos
+    i.run();
+  }
+
   ofSetColor(255, 255, 255, 200);
   ofDrawLine(30, 532, 620, 532); // show underline of list
-
-
+  
+  _font.drawString(to_string(isbnlist.size()) + u8"û", 60, 575);
+  //_font.drawString(to_string(isbnlist.size()) + u8"û", 60, 575); // TODO: ‘Œv‹àŠz‚Ì’Ç‰ÁH
 
 }
 
@@ -198,5 +208,18 @@ void ofApp::showMousePos(ofTrueTypeFont& _font) {
 }
 
 void ofApp::updateISBNShowList() {
+  //reset isbnshowlist* text
+  for (auto i : isbnshowlist) {
+    i.text = "";
+  }
+  for (auto i : isbnshowlistatpos) {
+    i.text = "";
+  }
+  
+  isbnshowliststartpos = max(0,int(isbnlist.size()) - 5);
 
+  for (int i = 0; i < min(5,int(isbnlist.size())); i++) {
+    isbnshowlist[i].text = isbnlist[i + isbnshowliststartpos];
+    isbnshowlistatpos[i].text = to_string(isbnshowliststartpos + i + 1);
+  }
 }
