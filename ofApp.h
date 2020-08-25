@@ -2,6 +2,7 @@
 #include "ofMain.h"
 #include "ofxButton.h"
 #include "ofxPiyo.h"
+#include "ofxNumSetter.h"
 /*
 TODO:
 
@@ -64,6 +65,6 @@ class ofApp : public ofBaseApp {
 
   ofxButton allremove;
 
-  //ofxNumSetter coupon;
+  ofxNumSetter couponnumsetter;
 
 };

@@ -10,6 +10,6 @@ public:
 private:
   int num = 0;
   int x, y, w, h;
-  ofColor& arrowcolor;
-  ofTrueTypeFont& font;
+  ofColor arrowcolor;
+  ofTrueTypeFont font;
 };

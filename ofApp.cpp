@@ -93,7 +93,7 @@ void ofApp::draw() {
     
     if (allremove.run()) { removeISBNShowList(); }
 
-    //coupon.draw();
+    couponnumsetter.draw();
   }
 
   showUnixTime(font16);
@@ -172,7 +172,7 @@ void ofApp::buttonSet() {
 
   allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"ëS\nçÌ\nèú");
 
-  //coupon.set(800, 50, 100, 50, ofColor(230, 20, 20), font16);
+  couponnumsetter.set(800, 50, 100, 50, ofColor(230, 20, 20), font16);
 
 }
 

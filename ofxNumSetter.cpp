@@ -26,6 +26,5 @@ void ofxNumSetter::draw() {
   //draw num
   ofSetColor(0, 0, 0);
   font.drawString(to_string(num), (w * 0.5) - font.stringWidth(to_string(num)) / 2 + x + w * 0.5,
-    (h + font.stringHeight(to_string(num)) / 2 + y)
-    );
+    (h + font.stringHeight(to_string(num)) / 2 + y) );
 }
