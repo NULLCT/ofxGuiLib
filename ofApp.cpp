@@ -1,6 +1,6 @@
 #include "ofApp.h"
 #define DEBUG_SHOWMOUSEPOS
-#define DEBUG_NOLOADJAPANESE
+//#define DEBUG_NOLOADJAPANESE
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -91,9 +91,15 @@ void ofApp::draw() {
     ofBackground(ofColor(0, 0, 0));
     showISBNList(font32jp);
     
-    if (allremove.run()) { removeISBNShowList(); }
+    if (allremove.run()) { removeISBNShowList(); } // allremove button
 
-    couponnumsetter.run();
+    ofSetColor(255, 255, 255, 100);
+    ofDrawLine(755, 0, 755, ofGetHeight()); // partation between left to right
+
+    ofSetColor(255, 255, 255);
+    font32jp.drawString(u8"クーポンの数", 850, 40); // TODO: not perfect. use stringwidth
+
+    couponnumsetter.run(); // change coupon num
   }
 
   showUnixTime(font16);
@@ -172,7 +178,7 @@ void ofApp::buttonSet() {
 
   allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"全\n削\n除");
 
-  couponnumsetter.set(800, 50, 100, 50, ofColor(245, 245, 245), font16);
+  couponnumsetter.set(800, 50, 350, 50, ofColor(245, 245, 245), font16);
 
 }
 
