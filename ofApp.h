@@ -29,6 +29,7 @@ class ofApp : public ofBaseApp {
   void showUnixTime(ofTrueTypeFont& _font);
   void showMousePos(ofTrueTypeFont& _font);
   void updateISBNShowList();
+  void removeISBNShowList();
 
 
  private:
@@ -60,5 +61,7 @@ class ofApp : public ofBaseApp {
   vector<ofxButton> isbnshowlist; // is 5 best?
   vector<ofxButton> isbnshowlistatpos; // is 5 best?
   int isbnshowliststartpos = 0;
+
+  ofxButton allremove;
 
 };

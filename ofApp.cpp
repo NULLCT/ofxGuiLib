@@ -90,7 +90,11 @@ void ofApp::draw() {
   if (screen == 1) { // Sold page
     ofBackground(ofColor(0, 0, 0));
     showISBNList(font32jp);
-
+    
+    if (allremove.run()) {
+      removeISBNShowList();
+      cout << isbnshowlist[0].text << "\n";
+    }
   }
 
   showUnixTime(font16);
@@ -167,6 +171,8 @@ void ofApp::buttonSet() {
     isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(145, 145, 145), ofColor(0, 0, 0), font16, "");
   }
 
+  allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"‘S\ní\nœ\n\n");
+
 }
 
 //--------------------------------------------------------------
@@ -217,9 +223,22 @@ void ofApp::updateISBNShowList() {
   }
   
   isbnshowliststartpos = max(0,int(isbnlist.size()) - 5);
+  isbninputbuf = "";
 
   for (int i = 0; i < min(5,int(isbnlist.size())); i++) {
     isbnshowlist[i].text = isbnlist[i + isbnshowliststartpos];
     isbnshowlistatpos[i].text = to_string(isbnshowliststartpos + i + 1);
   }
+}
+
+void ofApp::removeISBNShowList() {
+  isbnlist.clear();
+  for (auto i : isbnshowlist) {
+    i.text.clear();
+  }
+  for (auto i : isbnshowlistatpos) {
+    i.text.clear();
+  }
+  isbnshowliststartpos = 0;
+  isbninputbuf.clear();
 }
