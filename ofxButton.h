@@ -14,8 +14,8 @@ class ofxButton {
   ofTrueTypeFont font;
 
   ofxButton();
-  void set(int _x, int _y, int _w, int _h, ofColor& _backcolor,
-           ofColor& _wordcolor, ofTrueTypeFont& _font, std::string _text);
+  void set(int _x, int _y, int _w, int _h, ofColor _backcolor,
+           ofColor _wordcolor, ofTrueTypeFont& _font, std::string _text);
   bool isfocus(void);
   bool run(void);
 

@@ -3,7 +3,7 @@
 
 class ofxNumSetter {
 public:
-  void set(int _x, int _y, int _w, int _h, ofColor& _arrowcolor, ofTrueTypeFont& _font);
+  void set(int _x, int _y, int _w, int _h, ofColor _arrowcolor, ofTrueTypeFont& _font);
   void reset();
   void run();
   bool isFocusRightArrow();

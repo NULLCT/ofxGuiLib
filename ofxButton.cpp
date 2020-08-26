@@ -8,7 +8,7 @@ ofxButton::ofxButton() {  // Initialize vars
 }
 
 void ofxButton::set(
-    int _x, int _y, int _w, int _h, ofColor& _backcolor, ofColor& _wordcolor,
+    int _x, int _y, int _w, int _h, ofColor _backcolor, ofColor _wordcolor,
     ofTrueTypeFont& _font,
     std::string _text) {  // Set Button size pos color font and text
   x = _x;

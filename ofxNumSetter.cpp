@@ -1,6 +1,6 @@
 ﻿#include "ofxNumSetter.h"
 
-void ofxNumSetter::set(int _x, int _y, int _w, int _h, ofColor& _arrowcolor,ofTrueTypeFont& _font) {
+void ofxNumSetter::set(int _x, int _y, int _w, int _h, ofColor _arrowcolor,ofTrueTypeFont& _font) {
   x = _x;
   y = _y;
   w = _w;
