@@ -1,4 +1,4 @@
-#include "ofApp.h"
+Ôªø#include "ofApp.h"
 #define DEBUG_SHOWMOUSEPOS
 //#define DEBUG_NOLOADJAPANESE
 
@@ -97,7 +97,7 @@ void ofApp::draw() {
     ofDrawLine(755, 0, 755, ofGetHeight()); // partation between left to right
 
     ofSetColor(255, 255, 255);
-    font32jp.drawString(u8"ÉNÅ[É|ÉìÇÃêî", 850, 40); // TODO: not perfect. use stringwidth
+    font32jp.drawString(u8"„ÇØ„Éº„Éù„É≥„ÅÆÊï∞", 850, 40); // TODO: not perfect. use stringwidth
 
     couponnumsetter.run(); // change coupon num
   }
@@ -166,7 +166,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {}
 //--------------------------------------------------------------
 void ofApp::buttonSet() {
   //Screen 0
-  welcome.set(ofGetWidth()/2-200, ofGetHeight()/2-100, 400, 200, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"Ç®édéñÇÇÕÇ∂ÇﬂÇÈ");
+  welcome.set(ofGetWidth()/2-200, ofGetHeight()/2-100, 400, 200, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"„Åä‰ªï‰∫ã„Çí„ÅØ„Åò„ÇÅ„Çã");
 
   //Screen 1
   isbnshowlist.resize(5);
@@ -176,7 +176,7 @@ void ofApp::buttonSet() {
     isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(145, 145, 145), ofColor(0, 0, 0), font16, "");
   }
 
-  allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"ëS\nçÌ\nèú");
+  allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"ÂÖ®\nÂâä\nÈô§");
 
   couponnumsetter.set(800, 50, 350, 50, ofColor(245, 245, 245), font16);
 
@@ -200,8 +200,8 @@ void ofApp::showISBNList(ofTrueTypeFont& _font) {
   ofSetColor(255, 255, 255, 200);
   ofDrawLine(30, 532, 620, 532); // show underline of list
   
-  _font.drawString(to_string(isbnlist.size()) + u8"ç˚", 60, 575);
-  //_font.drawString(to_string(isbnlist.size()) + u8"ç˚", 60, 575); // TODO: ëçåvã‡äzÇÃí«â¡ÅH
+  _font.drawString(to_string(isbnlist.size()) + u8"ÂÜä", 60, 575);
+  //_font.drawString(to_string(isbnlist.size()) + u8"ÂÜä", 60, 575); // TODO: Á∑èË®àÈáëÈ°ç„ÅÆËøΩÂä†Ôºü
 
 }
 

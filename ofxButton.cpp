@@ -1,4 +1,4 @@
-#include "ofxButton.h"
+﻿#include "ofxButton.h"
 
 ofxButton::ofxButton() {  // Initialize vars
   x = y = w = h = 0;
