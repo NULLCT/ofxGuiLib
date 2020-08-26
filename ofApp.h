@@ -1,4 +1,5 @@
 #pragma once
+#include <limits>
 #include "ofMain.h"
 #include "ofxButton.h"
 #include "ofxPiyo.h"
@@ -43,6 +44,7 @@ class ofApp : public ofBaseApp {
   vector<string> isbnsoldtime;  // List of the time when the book was sold
                                 // (isbnsoldtime.txt)
   int isbncoupon=0;              // Count how many coupon used (isbncoupon.txt)
+  const int bookcost = 100;
 
   /*ISBN input system*/
   string isbninputbuf=""; // type num will in this
@@ -66,5 +68,8 @@ class ofApp : public ofBaseApp {
   ofxButton allremove;
 
   ofxNumSetter couponnumsetter;
+  ofxButton subtotal;
+  ofxButton coupontotal;
+  ofxButton total;
 
 };

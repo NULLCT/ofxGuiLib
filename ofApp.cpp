@@ -1,4 +1,7 @@
 ﻿#include "ofApp.h"
+#include "ofColor.h"
+#include <climits>
+#include <string>
 #define DEBUG_SHOWMOUSEPOS
 //#define DEBUG_NOLOADJAPANESE
 
@@ -99,7 +102,13 @@ void ofApp::draw() {
     ofSetColor(255, 255, 255);
     font32jp.drawString(u8"クーポンの数", 850, 40); // TODO: not perfect. use stringwidth
 
-    couponnumsetter.run(); // change coupon num
+    if (couponnumsetter.run()) {
+      updateISBNShowList();
+    } // change coupon num
+
+    subtotal.run();
+    coupontotal.run();
+    total.run();
   }
 
   showUnixTime(font16);
@@ -111,22 +120,24 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-  if (key == '0') { isbninputbuf += "0"; }
-  if (key == '1') { isbninputbuf += "1"; }
-  if (key == '2') { isbninputbuf += "2"; }
-  if (key == '3') { isbninputbuf += "3"; }
-  if (key == '4') { isbninputbuf += "4"; }
-  if (key == '5') { isbninputbuf += "5"; }
-  if (key == '6') { isbninputbuf += "6"; }
-  if (key == '7') { isbninputbuf += "7"; }
-  if (key == '8') { isbninputbuf += "8"; }
-  if (key == '9') { isbninputbuf += "9"; }
+  if(screen == 1){
+    if (key == '0') { isbninputbuf += "0"; }
+    if (key == '1') { isbninputbuf += "1"; }
+    if (key == '2') { isbninputbuf += "2"; }
+    if (key == '3') { isbninputbuf += "3"; }
+    if (key == '4') { isbninputbuf += "4"; }
+    if (key == '5') { isbninputbuf += "5"; }
+    if (key == '6') { isbninputbuf += "6"; }
+    if (key == '7') { isbninputbuf += "7"; }
+    if (key == '8') { isbninputbuf += "8"; }
+    if (key == '9') { isbninputbuf += "9"; }
 
-  if (key == ofKey::OF_KEY_RETURN) {
-    if (isbninputbuf != "") { // if isbninputbuf is not empty
-      isbnlist.push_back(isbninputbuf); // add to isbnlist
-      isbninputbuf = "";                // clear isbninputbuf
-      updateISBNShowList();             // update isbn show list
+    if (key == ofKey::OF_KEY_RETURN) {
+      if (isbninputbuf != "") { // if isbninputbuf is not empty
+        isbnlist.push_back(isbninputbuf); // add to isbnlist
+        isbninputbuf = "";                // clear isbninputbuf
+        updateISBNShowList();             // update isbn show list
+      }
     }
   }
 }
@@ -178,8 +189,11 @@ void ofApp::buttonSet() {
 
   allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"全\n削\n除");
 
-  couponnumsetter.set(800, 50, 350, 50, ofColor(245, 245, 245), font16);
+  couponnumsetter.set(800, 50, 350, 50, 0, INT_MAX, ofColor(245, 245, 245), font16);
 
+  subtotal.set(800,150,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"小計: 0円");
+  coupontotal.set(800,250,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"クーポン値引: 0円");
+  total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計: 0円");
 }
 
 //--------------------------------------------------------------
@@ -236,6 +250,10 @@ void ofApp::updateISBNShowList() {
     isbnshowlist[i].text = isbnlist[i + isbnshowliststartpos];
     isbnshowlistatpos[i].text = to_string(isbnshowliststartpos + i + 1);
   }
+
+  subtotal.text=u8"小計: "+to_string(isbnlist.size()*bookcost)+u8"円";
+  coupontotal.text = u8"クーポン値引: " + to_string(couponnumsetter.getNum()*bookcost) + u8"円";
+  total.text = u8"総計: "+to_string((int(isbnlist.size())-couponnumsetter.getNum())*bookcost)+u8"円";
 }
 
 void ofApp::removeISBNShowList() {
@@ -247,4 +265,5 @@ void ofApp::removeISBNShowList() {
   isbnshowliststartpos = 0;
 
   buttonSet(); // TODO: is it true way? it can work but I dont like
+  updateISBNShowList();
 }

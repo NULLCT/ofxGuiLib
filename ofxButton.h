@@ -7,7 +7,7 @@
 #include "ofMain.h"
 
 class ofxButton {
- public:
+public:
   std::string text;
   int x, y, w, h;
   ofColor backcolor, wordcolor;
@@ -15,11 +15,10 @@ class ofxButton {
 
   ofxButton();
   void set(int _x, int _y, int _w, int _h, ofColor _backcolor,
-           ofColor _wordcolor, ofTrueTypeFont& _font, std::string _text);
+           ofColor _wordcolor, ofTrueTypeFont &_font, std::string _text);
   bool isfocus(void);
   bool run(void);
 
- private:
-
+private:
   bool clicktriger;
 };

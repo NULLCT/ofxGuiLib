@@ -1,19 +1,18 @@
 ﻿#include "ofxNumSetter.h"
 
-void ofxNumSetter::set(int _x, int _y, int _w, int _h, ofColor _arrowcolor,ofTrueTypeFont& _font) {
+void ofxNumSetter::set(int _x, int _y, int _w, int _h,int _limunder,int _limupper,ofColor _arrowcolor, ofTrueTypeFont& _font){
   x = _x;
   y = _y;
   w = _w;
   h = _h;
+  limunder = _limunder;
+  limupper = _limupper;
   arrowcolor = _arrowcolor;
   font = _font;
 }
 
-void ofxNumSetter::reset() {
-  num = 0;
-}
-
-void ofxNumSetter::run() {
+bool ofxNumSetter::run() {
+  bool tr=false;
   //draw twice triangle
   ofSetColor(arrowcolor);
   if (isFocusRightArrow()) {
@@ -21,7 +20,10 @@ void ofxNumSetter::run() {
     if (ofGetMousePressed()) {
       if (!clicktrigger) {
         clicktrigger = true;
-        num++;
+        if(num < limupper){
+          num++;
+          tr=true;
+        }
       }
     }
     else {
@@ -35,7 +37,10 @@ void ofxNumSetter::run() {
     if (ofGetMousePressed()) {
       if (!clicktrigger) {
         clicktrigger = true;
-        num--;
+        if(limunder < num){
+          num--;
+          tr=true;
+        }
       }
     }
     else {
@@ -51,6 +56,8 @@ void ofxNumSetter::run() {
   //draw num
   ofSetColor(100, 100, 100);
   font.drawString(to_string(num), ((w * 0.5) - font.stringWidth(to_string(num))) / 2 + x + w * 0.25, (h + font.stringHeight(to_string(num))) / 2 + y );
+
+  return tr;
 }
 
 bool ofxNumSetter::isFocusLeftArrow() {
@@ -63,4 +70,8 @@ bool ofxNumSetter::isFocusRightArrow() {
 
 int ofxNumSetter::getNum() {
   return num;
+}
+
+void ofxNumSetter::setNum(int _num) {
+  num=_num;
 }
