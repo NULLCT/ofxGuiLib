@@ -90,7 +90,7 @@ void ofApp::draw() {
   if (screen == 1) { // Sold page
     ofBackground(ofColor(0, 0, 0));
     showISBNList(font32jp);
-    
+
     if (allremove.run()) { removeISBNShowList(); } // allremove button
 
     ofSetColor(255, 255, 255, 100);
@@ -190,7 +190,7 @@ void ofApp::showISBNList(ofTrueTypeFont& _font) {
   }
 
   for (auto i : isbnshowlist) { // show isbnlist
-    i.run(); 
+    i.run();
   }
 
   for (auto i : isbnshowlistatpos) { // show isbnlistatpos
@@ -199,7 +199,7 @@ void ofApp::showISBNList(ofTrueTypeFont& _font) {
 
   ofSetColor(255, 255, 255, 200);
   ofDrawLine(30, 532, 620, 532); // show underline of list
-  
+
   _font.drawString(to_string(isbnlist.size()) + u8"冊", 60, 575);
   //_font.drawString(to_string(isbnlist.size()) + u8"冊", 60, 575); // TODO: 総計金額の追加？
 
@@ -228,7 +228,7 @@ void ofApp::updateISBNShowList() {
   for (auto i : isbnshowlistatpos) {
     i.text = "";
   }
-  
+
   isbnshowliststartpos = max(0,int(isbnlist.size()) - 5);
   isbninputbuf = "";
 
@@ -242,7 +242,7 @@ void ofApp::removeISBNShowList() {
   isbnlist.clear();
   isbnshowlist.clear();
   isbnshowlistatpos.clear();
-  
+
   isbninputbuf.clear();
   isbnshowliststartpos = 0;
 
