@@ -27,6 +27,7 @@ void ofApp::setup() {
   // isbnsold
   {
     ofBuffer buf = ofBufferFromFile("isbnsold.txt");
+    isbnsoldstr.open("isbnsold.txt", ofFile::Append);
     for (auto line : buf.getLines()) {
       isbnsold.push_back(line);
     }
@@ -34,6 +35,7 @@ void ofApp::setup() {
   // isbnsoldtime
   {
     ofBuffer buf = ofBufferFromFile("isbnsoldtime.txt");
+    isbnsoldtimestr.open("isbnsoldtime.txt", ofFile::Append);
     for (auto line : buf.getLines()) {
       isbnsoldtime.push_back(line);
     }
@@ -41,6 +43,8 @@ void ofApp::setup() {
   // isbncoupon
   {
     ofBuffer buf = ofBufferFromFile("isbncoupon.txt");
+    isbncouponstr.open("isbncoupon.txt", ofFile::WriteOnly);
+    cout << buf.getText() << "\n";
     for (auto line : buf.getLines()) {
       isbncoupon = stoi(line);
       break;
@@ -57,6 +61,15 @@ void ofApp::setup() {
     cout << "isbnsold.size: " << isbnsold.size() << "\n";
     cout << "isbnsoldtime.size: " << isbnsoldtime.size() << "\n";
     cout << "isbncoupon: " << isbncoupon << "\n";
+  }
+
+  // Error check
+  {
+    if (isbnsold.size() != isbnsoldtime.size()) {
+      ;//TODO: error message
+      cout << "something wrong\n";
+      ofExit();
+    }
   }
 
   /*Font*/
@@ -109,6 +122,10 @@ void ofApp::draw() {
     subtotal.run();
     coupontotal.run();
     total.run();
+    if (decision.run()) {
+      cout << "do decision\n";
+      decisionISBN();
+    }
   }
 
   showUnixTime(font16);
@@ -120,6 +137,10 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+  if (key == 'h') {
+    screen = 0;
+  }
+
   if(screen == 1){
     if (key == '0') { isbninputbuf += "0"; }
     if (key == '1') { isbninputbuf += "1"; }
@@ -194,6 +215,7 @@ void ofApp::buttonSet() {
   subtotal.set(800,150,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"小計: 0円");
   coupontotal.set(800,250,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"クーポン値引: 0円");
   total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計: 0円");
+  decision.set(800, 450, 350, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"確定");
 }
 
 //--------------------------------------------------------------
@@ -266,4 +288,32 @@ void ofApp::removeISBNShowList() {
 
   buttonSet(); // TODO: is it true way? it can work but I dont like
   updateISBNShowList();
+}
+
+void ofApp::decisionISBN() {
+  if (isbnlist.size() == 0) {
+    ;//TODO: error message
+    return;
+  }
+  // Check input nums
+  for (auto i : isbnlist) {
+    if (find(isbnraw.begin(), isbnraw.end(), i) != isbnraw.end() and find(isbnsold.begin(), isbnsold.end(), i) == isbnsold.end()) {
+      cout << i << " is ACCEPT\n";
+    }
+    else {
+      cout << i << " is ERROR\n";
+      ;//TODO: something notification that it is error
+      return;
+    }
+  }
+  
+  for (auto i : isbnlist) {
+    isbnsoldstr << i << "\n";
+    isbnsold.push_back(i);
+    isbnsoldtimestr << time(NULL) << "\n";
+    isbnsoldtime.push_back(to_string(time(NULL)));
+  }
+  isbncoupon += couponnumsetter.getNum();
+  isbncouponstr << isbncoupon;
+  cout << "coupon: " << isbncoupon << "\n";
 }

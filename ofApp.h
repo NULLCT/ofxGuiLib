@@ -32,6 +32,7 @@ class ofApp : public ofBaseApp {
   void showMousePos(ofTrueTypeFont& _font);
   void updateISBNShowList();
   void removeISBNShowList();
+  void decisionISBN();
 
 
  private:
@@ -45,6 +46,8 @@ class ofApp : public ofBaseApp {
                                 // (isbnsoldtime.txt)
   int isbncoupon=0;              // Count how many coupon used (isbncoupon.txt)
   const int bookcost = 100;
+
+  ofFile isbnsoldstr, isbnsoldtimestr, isbncouponstr;
 
   /*ISBN input system*/
   string isbninputbuf=""; // type num will in this
@@ -71,5 +74,6 @@ class ofApp : public ofBaseApp {
   ofxButton subtotal;
   ofxButton coupontotal;
   ofxButton total;
+  ofxButton decision;
 
 };
