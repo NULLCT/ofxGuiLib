@@ -5,9 +5,14 @@
 #define DEBUG_SHOWMOUSEPOS
 //#define DEBUG_NOLOADJAPANESE
 
+using namespace std;
+
 //--------------------------------------------------------------
 void ofApp::setup() {
-  using namespace std;
+  //Log
+  ofLogToFile("Logs\\ISBNCTRLSYS.log", true);
+
+  ofLogNotice() << "ISBNCTRLSYS begins";
 
   /*Load files*/
   // Put logo
@@ -61,12 +66,17 @@ void ofApp::setup() {
     cout << "isbnsold.size: " << isbnsold.size() << "\n";
     cout << "isbnsoldtime.size: " << isbnsoldtime.size() << "\n";
     cout << "isbncoupon: " << isbncoupon << "\n";
+
+    ofLogNotice() << "isbnraw.size: " << isbnraw.size();
+    ofLogNotice() << "isbnsold.size: " << isbnsold.size();
+    ofLogNotice() << "isbnsoldtime.size: " << isbnsoldtime.size();
+    ofLogNotice() << "isbncoupon: " << isbncoupon;
   }
 
   // Error check
   {
     if (isbnsold.size() != isbnsoldtime.size()) {
-      ;//TODO: error message
+      ofLogFatalError() << "isbnsold.size != isbnsoldtime.size";
       cout << "something wrong\n";
       ofExit();
     }
@@ -101,6 +111,9 @@ void ofApp::draw() {
     ofBackground(ofColor(0, 0, 0));
     if (welcome.run()) {
       screen = 1;
+    }
+    if (saveunixtime.run()) {
+      writeNowUnixTime();
     }
   }
   if (screen == 1) { // Sold page
@@ -139,10 +152,6 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
   if (key == 'h') {
     screen = 0;
-  }
-  
-  if (key == 's') {
-    writeNowUnixTime();
   }
 
   if(screen == 1){
@@ -203,6 +212,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {}
 void ofApp::buttonSet() {
   //Screen 0
   welcome.set(ofGetWidth()/2-200, ofGetHeight()/2-100, 400, 200, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"お仕事をはじめる");
+  saveunixtime.set(900, 450, 200, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font16, u8"Save unixtime");
 
   //Screen 1
   isbnshowlist.resize(5);
@@ -241,8 +251,6 @@ void ofApp::showISBNList(ofTrueTypeFont& _font) {
   ofDrawLine(30, 532, 620, 532); // show underline of list
 
   _font.drawString(to_string(isbnlist.size()) + u8"冊", 60, 575);
-  //_font.drawString(to_string(isbnlist.size()) + u8"冊", 60, 575); // TODO: 総計金額の追加？
-
 }
 
 //--------------------------------------------------------------
@@ -297,8 +305,10 @@ void ofApp::removeISBNShowList() {
 }
 
 void ofApp::decisionISBN() {
+  ofLogNotice() << "decisionISBN";
+
   if (isbnlist.size() == 0) {
-    ;//TODO: error message
+    ofLogError() << "isbnlist.size is 0";
     return;
   }
   // Check input nums
@@ -308,7 +318,7 @@ void ofApp::decisionISBN() {
     }
     else {
       cout << i << " is ERROR\n";
-      ;//TODO: something notification that it is error
+      ofLogError() << "not found in isbnraw or isbnsold";
       return;
     }
   }
@@ -325,6 +335,8 @@ void ofApp::decisionISBN() {
 }
 
 void ofApp::writeNowUnixTime() {
+  ofLogNotice() << "writeNowUnixTime";
+
   ofFile timefile;
   timefile.open("Times\\Time_" + ofGetTimestampString() + ".txt", ofFile::WriteOnly);
   timefile << time(NULL);

@@ -64,6 +64,7 @@ class ofApp : public ofBaseApp {
   /*Buttons*/
   //screen: 0
   ofxButton welcome;  // "お仕事をはじめる" button
+  ofxButton saveunixtime; // for save unix time
   //screen: 1
   vector<ofxButton> isbnshowlist; // is 5 best?
   vector<ofxButton> isbnshowlistatpos; // is 5 best?
