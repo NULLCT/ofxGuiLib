@@ -140,6 +140,10 @@ void ofApp::keyPressed(int key) {
   if (key == 'h') {
     screen = 0;
   }
+  
+  if (key == 's') {
+    writeNowUnixTime();
+  }
 
   if(screen == 1){
     if (key == '0') { isbninputbuf += "0"; }
@@ -273,9 +277,9 @@ void ofApp::updateISBNShowList() {
     isbnshowlistatpos[i].text = to_string(isbnshowliststartpos + i + 1);
   }
 
-  subtotal.text=u8"小計: "+to_string(isbnlist.size()*bookcost)+u8"円";
-  coupontotal.text = u8"クーポン値引: " + to_string(couponnumsetter.getNum()*bookcost) + u8"円";
-  total.text = u8"総計: "+to_string((int(isbnlist.size())-couponnumsetter.getNum())*bookcost)+u8"円";
+  subtotal.text=u8"小計:"+to_string(isbnlist.size()*bookcost)+u8"円";
+  coupontotal.text = u8"クーポン値引:" + to_string(couponnumsetter.getNum()*bookcost) + u8"円";
+  total.text = u8"総計:"+to_string((int(isbnlist.size())-couponnumsetter.getNum())*bookcost)+u8"円";
 }
 
 void ofApp::removeISBNShowList() {
@@ -285,6 +289,8 @@ void ofApp::removeISBNShowList() {
 
   isbninputbuf.clear();
   isbnshowliststartpos = 0;
+
+  couponnumsetter.setNum(0);
 
   buttonSet(); // TODO: is it true way? it can work but I dont like
   updateISBNShowList();
@@ -316,4 +322,10 @@ void ofApp::decisionISBN() {
   isbncoupon += couponnumsetter.getNum();
   isbncouponstr << isbncoupon;
   cout << "coupon: " << isbncoupon << "\n";
+}
+
+void ofApp::writeNowUnixTime() {
+  ofFile timefile;
+  timefile.open("Times\\Time_" + ofGetTimestampString() + ".txt", ofFile::WriteOnly);
+  timefile << time(NULL);
 }

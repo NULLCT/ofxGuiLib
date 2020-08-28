@@ -33,6 +33,7 @@ class ofApp : public ofBaseApp {
   void updateISBNShowList();
   void removeISBNShowList();
   void decisionISBN();
+  void writeNowUnixTime();
 
 
  private:
