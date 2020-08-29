@@ -226,9 +226,9 @@ void ofApp::buttonSet() {
 
   couponnumsetter.set(800, 50, 350, 50, 0, INT_MAX, ofColor(245, 245, 245), font16);
 
-  subtotal.set(800,150,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"小計: 0円");
-  coupontotal.set(800,250,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"クーポン値引: 0円");
-  total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計: 0円");
+  subtotal.set(800,150,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"小計:0円");
+  coupontotal.set(800,250,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"クーポン値引:0円");
+  total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計:0円");
   decision.set(800, 450, 350, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"確定");
 }
 
@@ -308,7 +308,11 @@ void ofApp::decisionISBN() {
   ofLogNotice() << "decisionISBN";
 
   if (isbnlist.size() == 0) {
+    // ERROR
+    cout << "isbnlist.size is 0\n";
     ofLogError() << "isbnlist.size is 0";
+
+    removeISBNShowList();
     return;
   }
   // Check input nums
@@ -317,8 +321,11 @@ void ofApp::decisionISBN() {
       cout << i << " is ACCEPT\n";
     }
     else {
+      //ERROR
       cout << i << " is ERROR\n";
       ofLogError() << "not found in isbnraw or isbnsold";
+
+      removeISBNShowList();
       return;
     }
   }
