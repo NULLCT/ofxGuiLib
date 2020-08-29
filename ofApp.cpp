@@ -139,9 +139,13 @@ void ofApp::draw() {
       cout << "do decision\n";
       decisionISBN();
     }
+
+    notification.draw();
   }
 
   showUnixTime(font16);
+
+  piyo.run();
 
 #ifdef DEBUG_SHOWMOUSEPOS
   showMousePos(font16);
@@ -230,6 +234,8 @@ void ofApp::buttonSet() {
   coupontotal.set(800,250,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"クーポン値引:0円");
   total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計:0円");
   decision.set(800, 450, 350, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"確定");
+
+  notification.set(ofColor(255, 255, 255), ofColor(0, 0, 0), font32jp);
 }
 
 //--------------------------------------------------------------
@@ -310,11 +316,22 @@ void ofApp::decisionISBN() {
   if (isbnlist.size() == 0) {
     // ERROR
     cout << "isbnlist.size is 0\n";
+    notification.notice(u8"入力が何もありません");
     ofLogError() << "isbnlist.size is 0";
 
     removeISBNShowList();
     return;
   }
+
+  if (isbnlist.size() < couponnumsetter.getNum()) {
+    cout << "too much coupon\n";
+    notification.notice(u8"クーポン使いすぎ");
+    ofLogError() << "too much coupon";
+
+    removeISBNShowList();
+    return;
+  }
+
   // Check input nums
   for (auto i : isbnlist) {
     if (find(isbnraw.begin(), isbnraw.end(), i) != isbnraw.end() and find(isbnsold.begin(), isbnsold.end(), i) == isbnsold.end()) {
@@ -323,6 +340,7 @@ void ofApp::decisionISBN() {
     else {
       //ERROR
       cout << i << " is ERROR\n";
+      notification.notice(u8"本は登録されていないか売れていません");// TODO: more information
       ofLogError() << "not found in isbnraw or isbnsold";
 
       removeISBNShowList();

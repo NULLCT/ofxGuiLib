@@ -10,7 +10,7 @@ public:
 
 
 private:
-  const int animelim = 60 * 3;
+  const int animelim = 60 * 2;
 
   bool drawtrigger = false;
 

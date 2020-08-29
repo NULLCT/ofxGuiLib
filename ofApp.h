@@ -1,9 +1,11 @@
 #pragma once
 #include <limits>
 #include "ofMain.h"
+
 #include "ofxButton.h"
 #include "ofxPiyo.h"
 #include "ofxNumSetter.h"
+#include "ofxNotification.h"
 /*
 TODO:
 
@@ -77,5 +79,7 @@ class ofApp : public ofBaseApp {
   ofxButton coupontotal;
   ofxButton total;
   ofxButton decision;
+
+  ofxNotification notification;
 
 };
