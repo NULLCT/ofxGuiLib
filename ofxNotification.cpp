@@ -1,12 +1,12 @@
 #include "ofxNotification.h"
 
-void ofxNotification::set(ofColor _back, ofColor _word, ofTrueTypeFont& _font) {
-  back = _back;
-  word = _word;
+void ofxNotification::set(ofTrueTypeFont& _font) {
   font = _font;
 }
 
-void ofxNotification::notice(string _text) {
+void ofxNotification::notice(ofColor _back,ofColor _word,string _text) {
+  back = _back;
+  word = _word;
   text = _text;
 
   drawtrigger = true;

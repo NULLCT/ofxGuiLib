@@ -235,7 +235,7 @@ void ofApp::buttonSet() {
   total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計:0円");
   decision.set(800, 450, 350, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"確定");
 
-  notification.set(ofColor(255, 255, 255), ofColor(0, 0, 0), font32jp);
+  notification.set(font32jp);
 }
 
 //--------------------------------------------------------------
@@ -316,7 +316,8 @@ void ofApp::decisionISBN() {
   if (isbnlist.size() == 0) {
     // ERROR
     cout << "isbnlist.size is 0\n";
-    notification.notice(u8"入力が何もありません");
+    notification.back = ofColor(255, 0, 0);
+    notification.notice(ofColor(255,0,0),ofColor(0,0,0),u8"入力が何もありません");
     ofLogError() << "isbnlist.size is 0";
 
     removeISBNShowList();
@@ -325,7 +326,7 @@ void ofApp::decisionISBN() {
 
   if (isbnlist.size() < couponnumsetter.getNum()) {
     cout << "too much coupon\n";
-    notification.notice(u8"クーポン使いすぎ");
+    notification.notice(ofColor(255,255,255),ofColor(0,0,0),u8"クーポン使いすぎ");
     ofLogError() << "too much coupon";
 
     removeISBNShowList();
@@ -340,7 +341,7 @@ void ofApp::decisionISBN() {
     else {
       //ERROR
       cout << i << " is ERROR\n";
-      notification.notice(u8"本は登録されていないか売れていません");// TODO: more information
+      notification.notice(ofColor(255,0,0),ofColor(0,0,0),u8"本は登録されていないか売れていません");// TODO: more information
       ofLogError() << "not found in isbnraw or isbnsold";
 
       removeISBNShowList();
