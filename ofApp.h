@@ -81,5 +81,4 @@ class ofApp : public ofBaseApp {
   ofxButton decision;
 
   ofxNotification notification;
-
 };
