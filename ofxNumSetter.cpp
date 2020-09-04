@@ -50,11 +50,11 @@ bool ofxNumSetter::run() {
   ofDrawTriangle(x, y + h / 2, x + w * 0.2, y, x + w * 0.2, y + h);//left
 
   //draw center box
-  ofSetColor(255, 255, 255);
+  ofSetColor(0xeb, 0xdb, 0xb2);
   ofDrawRectangle(x + w * 0.25, y, w * 0.5, h);
 
   //draw num
-  ofSetColor(100, 100, 100);
+  ofSetColor(0x28, 0x28, 0x28);
   font.drawString(to_string(num), ((w * 0.5) - font.stringWidth(to_string(num))) / 2 + x + w * 0.25, (h + font.stringHeight(to_string(num))) / 2 + y );
 
   return tr;
