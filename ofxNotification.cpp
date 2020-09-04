@@ -27,7 +27,7 @@ void ofxNotification::draw() {
     }
     ofSetColor(back,alpha);
     ofDrawRectRounded(ofRectangle(100, ypos, ofGetWidth() - 200, 64), 16);
-    ofSetColor(word);
+    ofSetColor(word,alpha);
     font.drawString(text, ((ofGetWidth()-200)-font.stringWidth(text))/2+100,(64+font.stringHeight(text))/2+ypos);
   }
 }
