@@ -14,6 +14,9 @@ void ofApp::setup() {
 
   ofLogNotice() << "ISBNCTRLSYS begins";
 
+  /*Me*/
+  me.load("icon.png");
+
   /*Load files*/
   // Put logo
   {
@@ -108,24 +111,25 @@ void ofApp::update() {}
 //--------------------------------------------------------------
 void ofApp::draw() {
   if (screen == 0) { // Welcome page
-    ofBackground(ofColor(0, 0, 0));
+    ofBackground(ofColor(0x28, 0x28, 0x28));
     if (welcome.run()) {
       screen = 1;
     }
     if (saveunixtime.run()) {
       writeNowUnixTime();
     }
+    about.run();
   }
   if (screen == 1) { // Sold page
-    ofBackground(ofColor(0, 0, 0));
+    ofBackground(ofColor(0x28, 0x28, 0x28));
     showISBNList(font32jp);
 
     if (allremove.run()) { removeISBNShowList(); } // allremove button
 
-    ofSetColor(255, 255, 255, 100);
+    ofSetColor(0x92, 0x83, 0x74, 100);
     ofDrawLine(755, 0, 755, ofGetHeight()); // partation between left to right
 
-    ofSetColor(255, 255, 255);
+    ofSetColor(0xeb, 0xdb, 0xb2);
     font32jp.drawString(u8"クーポンの数", 850, 40); // TODO: not perfect. use stringwidth
 
     if (couponnumsetter.run()) {
@@ -139,6 +143,8 @@ void ofApp::draw() {
       cout << "do decision\n";
       decisionISBN();
     }
+
+    me.draw(630, 390, 100, 100);
 
     notification.draw();
   }
@@ -170,11 +176,23 @@ void ofApp::keyPressed(int key) {
     if (key == '8') { isbninputbuf += "8"; }
     if (key == '9') { isbninputbuf += "9"; }
 
+    if (key == ofKey::OF_KEY_UP) {
+      if (0 < isbnshowliststartpos) 
+        isbnshowliststartpos--;
+      updateISBNShowList();
+    }
+    if (key == ofKey::OF_KEY_DOWN) {
+      if(isbnshowliststartpos < int(isbnlist.size())-5)
+        isbnshowliststartpos++;
+      updateISBNShowList();
+    }
+
     if (key == ofKey::OF_KEY_RETURN) {
       if (isbninputbuf != "") { // if isbninputbuf is not empty
         isbnlist.push_back(isbninputbuf); // add to isbnlist
         isbninputbuf = "";                // clear isbninputbuf
         updateISBNShowList();             // update isbn show list
+        isbnshowliststartpos = max(0, int(isbnlist.size()) - 5); // Update isbnsholiststartpos
       }
     }
   }
@@ -215,25 +233,26 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {}
 //--------------------------------------------------------------
 void ofApp::buttonSet() {
   //Screen 0
-  welcome.set(ofGetWidth()/2-200, ofGetHeight()/2-100, 400, 200, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"お仕事をはじめる");
-  saveunixtime.set(900, 450, 200, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font16, u8"Save unixtime");
+  welcome.set(ofGetWidth()/2-200, ofGetHeight()/2-100, 400, 200, ofColor(0xeb, 0xdb, 0xb2), ofColor(0x28, 0x28, 0x28), font32jp, u8"お仕事をはじめる");
+  saveunixtime.set(900, 450, 200, 100, ofColor(0xeb, 0xdb, 0xb2), ofColor(0x28, 0x28, 0x28), font16, u8"Save unixtime");
+  about.set(100, 450, 350, 100, ofColor(0xeb, 0xdb, 0xb2), ofColor(0x28, 0x28, 0x28), font16 , "github.com/NULLCT/ISBNCTRLSYS");
 
   //Screen 1
   isbnshowlist.resize(5);
   isbnshowlistatpos.resize(5);
   for (int i = 0; i < isbnshowlist.size();i++) {
-    isbnshowlist[i].set(100, 50 + i * 100, 500, 64, ofColor(245, 245, 245), ofColor(0, 0, 0), font16, "");
-    isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(145, 145, 145), ofColor(0, 0, 0), font16, "");
+    isbnshowlist[i].set(100, 50 + i * 100, 500, 64, ofColor(0xeb, 0xdb, 0xb2), ofColor(0x28, 0x28, 0x28), font16, "");
+    isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(0xa8, 0x99, 0x84), ofColor(0x28, 0x28, 0x28), font16, "");
   }
 
-  allremove.set(650, 50, 50, 300, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"全\n削\n除");
+  allremove.set(650, 50, 50, 300, ofColor(0xeb, 0xdb, 0xb2), ofColor(0x28, 0x28, 0x28), font32jp, u8"全\n削\n除");
 
-  couponnumsetter.set(800, 50, 350, 50, 0, INT_MAX, ofColor(245, 245, 245), font16);
+  couponnumsetter.set(800, 50, 350, 50, 0, INT_MAX, ofColor(0xa8, 0x99, 0x84), font16);
 
-  subtotal.set(800,150,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"小計:0円");
-  coupontotal.set(800,250,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"クーポン値引:0円");
-  total.set(800,350,350,50,ofColor(245,245,245),ofColor(0,0,0),font32jp,u8"総計:0円");
-  decision.set(800, 450, 350, 100, ofColor(245, 245, 245), ofColor(0, 0, 0), font32jp, u8"確定");
+  subtotal.set(800,150,350,50,ofColor(0xeb, 0xdb, 0xb2),ofColor(0x28, 0x28, 0x28),font32jp,u8"小計:0円");
+  coupontotal.set(800,250,350,50,ofColor(0xeb, 0xdb, 0xb2),ofColor(0x28, 0x28, 0x28),font32jp,u8"クーポン:0円");
+  total.set(800,350,350,50,ofColor(0xeb, 0xdb, 0xb2),ofColor(0x28, 0x28, 0x28),font32jp,u8"総計:0円");
+  decision.set(800, 450, 350, 100, ofColor(0xfb, 0x49, 0x34), ofColor(0x28, 0x28, 0x28), font32jp, u8"確定");
 
   notification.set(font32jp);
 }
@@ -283,7 +302,6 @@ void ofApp::updateISBNShowList() {
     i.text = "";
   }
 
-  isbnshowliststartpos = max(0,int(isbnlist.size()) - 5);
   isbninputbuf = "";
 
   for (int i = 0; i < min(5,int(isbnlist.size())); i++) {
@@ -292,7 +310,7 @@ void ofApp::updateISBNShowList() {
   }
 
   subtotal.text=u8"小計:"+to_string(isbnlist.size()*bookcost)+u8"円";
-  coupontotal.text = u8"クーポン値引:" + to_string(couponnumsetter.getNum()*bookcost) + u8"円";
+  coupontotal.text = u8"クーポン:" + to_string(couponnumsetter.getNum()*bookcost) + u8"円";
   total.text = u8"総計:"+to_string((int(isbnlist.size())-couponnumsetter.getNum())*bookcost)+u8"円";
 }
 
@@ -306,6 +324,8 @@ void ofApp::removeISBNShowList() {
 
   couponnumsetter.setNum(0);
 
+  isbnshowliststartpos = max(0,int(isbnlist.size()) - 5);
+
   buttonSet(); // TODO: is it true way? it can work but I dont like
   updateISBNShowList();
 }
@@ -317,7 +337,7 @@ void ofApp::decisionISBN() {
     // ERROR
     cout << "isbnlist.size is 0\n";
     notification.back = ofColor(255, 0, 0);
-    notification.notice(ofColor(255,0,0),ofColor(0,0,0),u8"入力が何もありません");
+    notification.notice(ofColor(0xcc,0x24,0x1d),ofColor(0xeb,0xdb,0xb2),u8"入力が何もありません");
     ofLogError() << "isbnlist.size is 0";
 
     removeISBNShowList();
@@ -326,7 +346,7 @@ void ofApp::decisionISBN() {
 
   if (isbnlist.size() < couponnumsetter.getNum()) {
     cout << "too much coupon\n";
-    notification.notice(ofColor(255,255,255),ofColor(0,0,0),u8"クーポン使いすぎ");
+    notification.notice(ofColor(0xcc,0x24,0x1d),ofColor(0xeb,0xdb,0xb2),u8"クーポン使いすぎ");
     ofLogError() << "too much coupon";
 
     removeISBNShowList();
@@ -341,7 +361,7 @@ void ofApp::decisionISBN() {
     else {
       //ERROR
       cout << i << " is ERROR\n";
-      notification.notice(ofColor(255,0,0),ofColor(0,0,0),u8"本は登録されていないか売れていません");// TODO: more information
+      notification.notice(ofColor(0xcc,0x24,0x1d),ofColor(0xeb,0xdb,0xb2),u8"本は登録されていないか売れていません");// TODO: more information
       ofLogError() << "not found in isbnraw or isbnsold";
 
       removeISBNShowList();
