@@ -126,8 +126,8 @@ void ofApp::draw() {
 
     if (allremove.run()) { removeISBNShowList(); } // allremove button
 
-    ofSetColor(0x92, 0x83, 0x74, 100);
-    ofDrawLine(755, 0, 755, ofGetHeight()); // partation between left to right
+//    ofSetColor(0x92, 0x83, 0x74, 100);
+//    ofDrawLine(755, 0, 755, ofGetHeight()); // partation between left to right
 
     ofSetColor(0xeb, 0xdb, 0xb2);
     font32jp.drawString(u8"クーポンの数", 850, 40); // TODO: not perfect. use stringwidth
@@ -144,9 +144,9 @@ void ofApp::draw() {
       decisionISBN();
     }
 
-    me.draw(630, 390, 100, 100);
-
     notification.draw();
+
+    me.draw(665, 380, 100, 100);
   }
 
   showUnixTime(font16);
@@ -245,14 +245,14 @@ void ofApp::buttonSet() {
     isbnshowlistatpos[i].set(50, 50 + i * 100, 90, 64, ofColor(0xa8, 0x99, 0x84), ofColor(0x28, 0x28, 0x28), font16, "");
   }
 
-  allremove.set(650, 50, 50, 300, ofColor(0xeb, 0xdb, 0xb2), ofColor(0x28, 0x28, 0x28), font32jp, u8"全\n削\n除");
+  allremove.set(650, 50, 125, 300, ofColor(0xd7, 0x99, 0x21), ofColor(0x28, 0x28, 0x28), font32jp, u8"入力\n削除");
 
   couponnumsetter.set(800, 50, 350, 50, 0, INT_MAX, ofColor(0xa8, 0x99, 0x84), font16);
 
   subtotal.set(800,150,350,50,ofColor(0xeb, 0xdb, 0xb2),ofColor(0x28, 0x28, 0x28),font32jp,u8"小計:0円");
   coupontotal.set(800,250,350,50,ofColor(0xeb, 0xdb, 0xb2),ofColor(0x28, 0x28, 0x28),font32jp,u8"クーポン:0円");
-  total.set(800,350,350,50,ofColor(0xeb, 0xdb, 0xb2),ofColor(0x28, 0x28, 0x28),font32jp,u8"総計:0円");
-  decision.set(800, 450, 350, 100, ofColor(0xfb, 0x49, 0x34), ofColor(0x28, 0x28, 0x28), font32jp, u8"確定");
+  total.set(800,350,350,50,ofColor(0x68, 0x9d, 0x6a),ofColor(0x28, 0x28, 0x28),font32jp,u8"総計:0円");
+  decision.set(800, 450, 350, 100, ofColor(0x45, 0x85, 0x88), ofColor(0x28, 0x28, 0x28), font32jp, u8"確定");
 
   notification.set(font32jp);
 }
