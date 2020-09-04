@@ -4,7 +4,7 @@
 int main() {
   ofGLFWWindowSettings settings;  // OpenFrameWorks setting
 
-  settings.title = "ISBNCTRLSYS by NULLCT";  // Title
+  settings.title = "ISBNCTRLSYS(github.com/NULLCT/ISBNCTRLSYS) | Made by NULLCT";  // Title
   settings.setSize(1200, 600);           // Size
   settings.resizable = false;            // non resiable
 
