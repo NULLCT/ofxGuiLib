@@ -13,6 +13,7 @@ class Piyo {
 
  private:
   ofImage piyoimage;
+  int lim = 100;
   int x, y, w, h;
   int replaceframe = 60 * 10;
 };
