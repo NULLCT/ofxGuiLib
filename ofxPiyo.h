@@ -7,11 +7,11 @@
 #include "ofMain.h"
 
 class Piyo {
- public:
+public:
   Piyo();
   void run();
 
- private:
+private:
   ofImage piyoimage;
   int lim = 100;
   int x, y, w, h;

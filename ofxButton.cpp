@@ -1,6 +1,6 @@
 ﻿#include "ofxButton.h"
 
-ofxButton::ofxButton() {  // Initialize vars
+ofxButton::ofxButton() { // Initialize vars
   x = y = w = h = 0;
   backcolor.r = backcolor.g = backcolor.b = 0;
   wordcolor.r = wordcolor.g = wordcolor.b = 0;
@@ -9,8 +9,8 @@ ofxButton::ofxButton() {  // Initialize vars
 
 void ofxButton::set(
     int _x, int _y, int _w, int _h, ofColor _backcolor, ofColor _wordcolor,
-    ofTrueTypeFont& _font,
-    std::string _text) {  // Set Button size pos color font and text
+    ofTrueTypeFont &_font,
+    std::string _text) { // Set Button size pos color font and text
   x = _x;
   y = _y;
   w = _w;
@@ -21,13 +21,12 @@ void ofxButton::set(
   text = _text;
 }
 
-bool ofxButton::isfocus(void) {  // if this focus => True
+bool ofxButton::isfocus(void) { // if this focus => True
   return (x <= ofGetMouseX() and ofGetMouseX() <= x + w) and
          (y <= ofGetMouseY() and ofGetMouseY() <= y + h);
 }
 
-bool ofxButton::run(
-    void) {  // draw button and return bool if this click => True
+bool ofxButton::run(void) { // draw button and return bool if this click => True
   if (isfocus()) {
     ofSetColor(backcolor.r + 10, backcolor.g + 10, backcolor.b + 10);
     ofDrawRectangle(x, y, w, h);
@@ -35,7 +34,7 @@ bool ofxButton::run(
     font.drawString(text, (w - font.stringWidth(text)) / 2 + x,
                     (h + font.stringHeight(text)) / 2 + y);
     if (ofGetMousePressed()) {
-      if (!clicktriger) {  // If this is not clicked befor
+      if (!clicktriger) { // If this is not clicked befor
         clicktriger = true;
         return true;
       }

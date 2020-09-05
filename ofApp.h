@@ -1,17 +1,17 @@
 #pragma once
-#include <limits>
 #include "ofMain.h"
+#include <limits>
 
 #include "ofxButton.h"
-#include "ofxPiyo.h"
-#include "ofxNumSetter.h"
 #include "ofxNotification.h"
+#include "ofxNumSetter.h"
+#include "ofxPiyo.h"
 /*
 TODO:
 
 */
 class ofApp : public ofBaseApp {
- public:
+public:
   void setup();
   void update();
   void draw();
@@ -29,36 +29,35 @@ class ofApp : public ofBaseApp {
 
   /*Made by myself functions*/
   void buttonSet();
-  void showISBNList(ofTrueTypeFont& _font);
-  void showUnixTime(ofTrueTypeFont& _font);
-  void showMousePos(ofTrueTypeFont& _font);
+  void showISBNList(ofTrueTypeFont &_font);
+  void showUnixTime(ofTrueTypeFont &_font);
+  void showMousePos(ofTrueTypeFont &_font);
   void updateISBNShowList();
   void removeISBNShowList();
   void decisionISBN();
   void writeNowUnixTime();
 
-
- private:
+private:
   /*Screen control*/
-  int screen = 0;//0=>welcome page, 1=>sold page
+  int screen = 0; // 0=>welcome page, 1=>sold page
 
   /*ISBN Date*/
-  vector<string> isbnraw;       // List of isbn numbers in shop (isbnraw.txt)
-  vector<string> isbnsold;      // List of sold book's isbn (isbnsold.txt)
-  vector<string> isbnsoldtime;  // List of the time when the book was sold
-                                // (isbnsoldtime.txt)
-  int isbncoupon=0;              // Count how many coupon used (isbncoupon.txt)
+  vector<string> isbnraw;      // List of isbn numbers in shop (isbnraw.txt)
+  vector<string> isbnsold;     // List of sold book's isbn (isbnsold.txt)
+  vector<string> isbnsoldtime; // List of the time when the book was sold
+                               // (isbnsoldtime.txt)
+  int isbncoupon = 0;          // Count how many coupon used (isbncoupon.txt)
   const int bookcost = 100;
 
   ofFile isbnsoldstr, isbnsoldtimestr, isbncouponstr;
 
   /*ISBN input system*/
-  string isbninputbuf=""; // type num will in this
-  vector<string> isbnlist; // isbninputbuf will in this when type return(enter)
+  string isbninputbuf = ""; // type num will in this
+  vector<string> isbnlist;  // isbninputbuf will in this when type return(enter)
 
   /*Font*/
-  ofTrueTypeFont font32jp;  // Font for ofxButton
-  ofTrueTypeFont font16; // Font for ofApp::showunixtime()
+  ofTrueTypeFont font32jp; // Font for ofxButton
+  ofTrueTypeFont font16;   // Font for ofApp::showunixtime()
 
   /*Piyo*/
   Piyo piyo;
@@ -67,12 +66,12 @@ class ofApp : public ofBaseApp {
   ofImage me;
 
   /*Buttons*/
-  //screen: 0
-  ofxButton welcome;  // "お仕事をはじめる" button
+  // screen: 0
+  ofxButton welcome;      // "お仕事をはじめる" button
   ofxButton saveunixtime; // for save unix time
-  ofxButton about; // about me
-  //screen: 1
-  vector<ofxButton> isbnshowlist; // is 5 best?
+  ofxButton about;        // about me
+  // screen: 1
+  vector<ofxButton> isbnshowlist;      // is 5 best?
   vector<ofxButton> isbnshowlistatpos; // is 5 best?
   int isbnshowliststartpos = 0;
 

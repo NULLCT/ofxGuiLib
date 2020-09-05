@@ -4,8 +4,8 @@
 
 class ofxNotification {
 public:
-  void set(ofTrueTypeFont& _font);
-  void notice(ofColor _back,ofColor _word,string _text);
+  void set(ofTrueTypeFont &_font);
+  void notice(ofColor _back, ofColor _word, string _text);
   void draw();
 
   ofColor back, word;
