@@ -1,5 +1,6 @@
 ﻿#include "ofApp.h"
 #include "ofColor.h"
+#include "ofLog.h"
 #include <climits>
 #include <string>
 #define DEBUG_SHOWMOUSEPOS
@@ -11,8 +12,6 @@ using namespace std;
 void ofApp::setup() {
   // Log
   ofLogToFile("Logs\\ISBNCTRLSYS.log", true);
-
-  ofLogNotice() << "ISBNCTRLSYS begins";
 
   /*Me*/
   me.load("icon.png");
@@ -403,8 +402,9 @@ void ofApp::decisionISBN() {
     isbnsoldtime.push_back(to_string(time(NULL)));
   }
   isbncoupon += couponnumsetter.getNum();
-  isbncouponstr << isbncoupon;
   cout << "coupon: " << isbncoupon << "\n";
+  notification.notice(ofColor(0x98,0x97,0x1a), ofColor(0xeb, 0xdb, 0xb2), u8"売却しました");
+  removeISBNShowList();
 }
 
 void ofApp::writeNowUnixTime() {
@@ -414,4 +414,9 @@ void ofApp::writeNowUnixTime() {
   timefile.open("Times\\Time_" + ofGetTimestampString() + ".txt",
                 ofFile::WriteOnly);
   timefile << time(NULL);
+}
+
+ofApp::~ofApp() {
+  isbncouponstr << isbncoupon; // save coupon
+  ofLogNotice() << "ofApp's destructor was called";
 }

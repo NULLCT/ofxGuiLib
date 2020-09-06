@@ -36,6 +36,7 @@ public:
   void removeISBNShowList();
   void decisionISBN();
   void writeNowUnixTime();
+  ~ofApp();
 
 private:
   /*Screen control*/
