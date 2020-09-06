@@ -7,6 +7,7 @@ fork from https://github.com/NULLCT/ISBNCTRLSYS
 - ofxButton  Draw button
 - ofxNotification  Draw notification on upside
 - ofxNumSetter  Draw　numsetter like html's <input type="number">
+- Comming soon!
 
 ## License
 
